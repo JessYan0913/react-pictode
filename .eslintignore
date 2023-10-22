@@ -4,3 +4,5 @@ node_modules
 dest
 types
 public/
+tailwind.config.js
+postcss.config.js

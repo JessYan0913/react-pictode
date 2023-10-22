@@ -1,3 +1,2 @@
-export { Button } from './components/Button';
-export { Input } from './components/Input';
-export { Label } from './components/Label';
+export { Pictode } from './components/Pictode';
+export { Tools } from './components/Tools';
