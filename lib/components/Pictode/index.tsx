@@ -1,6 +1,6 @@
 import { createContext, useEffect, useRef, useState } from 'react';
 import { App } from '@pictode/core';
-import { RectTool } from '@pictode/tools';
+import { SelectorPlugin } from '@pictode/plugin-selector';
 
 import { StageProps } from './types';
 
@@ -10,14 +10,7 @@ export function Pictode(props: StageProps) {
   const { className, ...restProps } = props;
   const stageRef = useRef<HTMLDivElement | null>(null);
   const [app] = useState<App>(new App());
-  app.setTool(
-    new RectTool({
-      config: {
-        stroke: '#ff00ff',
-        strokeWidth: 2,
-      },
-    })
-  );
+  app.use(new SelectorPlugin());
   useEffect(() => {
     if (stageRef.current) {
       app.mount(stageRef.current);
