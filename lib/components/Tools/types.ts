@@ -8,7 +8,7 @@ export interface ToolInfo {
 
 export type ToolType = 'selectTool' | 'rectTool' | 'ellipseTool' | 'eraserTool' | 'lineTool' | 'textTool' | 'imageTool';
 
-export interface ToolsProps {
+export interface ToolsProps extends React.HTMLAttributes<HTMLDivElement> {
   tools?: ToolType[];
   itemRender?: (props: { active: boolean; checked: boolean; tool: string }) => ReactElement;
 }

@@ -139,7 +139,11 @@ export function Tools(props: ToolsProps) {
   if (!pictode) {
     throw new Error(`<Tools /> is missing a parent <Pictode /> component.`);
   }
-  const { tools = ['selectTool', 'rectTool', 'ellipseTool', 'lineTool', 'textTool', 'imageTool'], itemRender } = props;
+  const {
+    tools = ['selectTool', 'rectTool', 'ellipseTool', 'lineTool', 'textTool', 'imageTool'],
+    itemRender,
+    className,
+  } = props;
   const [tool, setTool] = useState<ToolType>('selectTool');
 
   useEffect(() => {
@@ -147,7 +151,7 @@ export function Tools(props: ToolsProps) {
   }, [tool, pictode.app]);
 
   return (
-    <RadioGroup value={tool} onChange={setTool}>
+    <RadioGroup className={className} value={tool} onChange={setTool}>
       {tools.map((tool) => (
         <RadioGroup.Option key={tool} value={tool} as={Fragment}>
           {({ checked, active }) => (itemRender ? itemRender({ active, checked, tool }) : <></>)}
