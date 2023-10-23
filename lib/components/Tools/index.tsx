@@ -144,7 +144,7 @@ export function Tools(props: ToolsProps) {
 
   useEffect(() => {
     pictode.app.setTool(getTool(tool));
-  }, [tool]);
+  }, [tool, pictode.app]);
 
   return (
     <RadioGroup value={tool} onChange={setTool}>
