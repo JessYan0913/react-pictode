@@ -1,15 +1,11 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-import { PictodeContext } from '../Pictode';
+import { usePictode } from '../hooks/usePictode';
 
 import { StageProps } from './types';
 
 export const Stage = (props: StageProps) => {
-  const pictode = useContext(PictodeContext);
-
-  if (!pictode) {
-    throw new Error(`<Stage /> is missing a parent <Pictode /> component.`);
-  }
+  const { app } = usePictode('Stage');
 
   const { className } = props;
 
@@ -17,9 +13,9 @@ export const Stage = (props: StageProps) => {
 
   useEffect(() => {
     if (stageRef.current) {
-      pictode.app.mount(stageRef.current);
+      app.mount(stageRef.current);
     }
-  }, [pictode.app]);
+  }, [app]);
 
   return (
     <>
