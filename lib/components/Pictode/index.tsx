@@ -9,13 +9,18 @@ export const PictodeContext = createContext<PictodeContextType | null>(null);
 export const Pictode = forwardRef(function (props: StageProps, ref: React.ForwardedRef<PictodeContextType>) {
   const { className, children } = props;
   const [app] = useState<App>(new App());
-  const selectorPlugin = new SelectorPlugin();
+  const [selectorPlugin] = useState<SelectorPlugin>(new SelectorPlugin());
+
   app.use(selectorPlugin);
 
-  useImperativeHandle(ref, () => ({
-    app,
-    selectorPlugin,
-  }));
+  useImperativeHandle(
+    ref,
+    () => ({
+      app,
+      selectorPlugin,
+    }),
+    [app, selectorPlugin]
+  );
 
   return (
     <PictodeContext.Provider value={{ app, selectorPlugin }}>

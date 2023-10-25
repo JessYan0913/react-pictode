@@ -6,17 +6,14 @@ import { Icon } from '../Icon';
 import { EraserToolProps } from './types';
 
 export const EraserTool = (props: EraserToolProps) => {
-  const { app, selectorPlugin } = usePictode('EraserTool');
+  const { app } = usePictode('EraserTool');
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children, className, ...restProps } = props;
 
   const onClick = () => {
     app.setTool(
       new Eraser({
         hooks: {
-          onActive(app, tool) {
-            selectorPlugin.disable();
-            onActive?.(app, tool);
-          },
+          onActive,
           onInactive,
           onStartDrawing,
           onCompleteDrawing,

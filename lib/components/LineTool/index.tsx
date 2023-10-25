@@ -6,7 +6,7 @@ import { Icon } from '../Icon';
 import { LineToolProps } from './types';
 
 export const LineTool = (props: LineToolProps) => {
-  const { app, selectorPlugin } = usePictode('LineTool');
+  const { app } = usePictode('LineTool');
   const {
     stroke = '#000000',
     strokeWidth = 2,
@@ -29,10 +29,7 @@ export const LineTool = (props: LineToolProps) => {
           opacity,
         },
         hooks: {
-          onActive(app, tool) {
-            selectorPlugin.disable();
-            onActive?.(app, tool);
-          },
+          onActive,
           onInactive,
           onStartDrawing,
           onCompleteDrawing,

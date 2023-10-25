@@ -6,7 +6,7 @@ import { Icon } from '../Icon';
 import { RectToolProps } from './types';
 
 export const RectTool = (props: RectToolProps) => {
-  const { app, selectorPlugin } = usePictode('RectTool');
+  const { app } = usePictode('RectTool');
   const {
     stroke = '#000000',
     strokeWidth = 2,
@@ -33,10 +33,7 @@ export const RectTool = (props: RectToolProps) => {
           opacity,
         },
         hooks: {
-          onActive(app, tool) {
-            selectorPlugin.disable();
-            onActive?.(app, tool);
-          },
+          onActive,
           onInactive,
           onStartDrawing,
           onCompleteDrawing,

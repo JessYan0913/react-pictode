@@ -6,7 +6,7 @@ import { Icon } from '../Icon';
 import { EllipseToolProps } from './types';
 
 export const EllipseTool = (props: EllipseToolProps) => {
-  const { app, selectorPlugin } = usePictode('EllipseTool');
+  const { app } = usePictode('EllipseTool');
   const {
     stroke = '#000000',
     strokeWidth = 2,
@@ -31,10 +31,7 @@ export const EllipseTool = (props: EllipseToolProps) => {
           opacity,
         },
         hooks: {
-          onActive(app, tool) {
-            selectorPlugin.disable();
-            onActive?.(app, tool);
-          },
+          onActive,
           onInactive,
           onStartDrawing,
           onCompleteDrawing,
