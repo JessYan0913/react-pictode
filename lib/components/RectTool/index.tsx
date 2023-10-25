@@ -12,8 +12,13 @@ export const RectTool = (props: RectToolProps) => {
     fill = '#00000000',
     cornerRadius = 0,
     opacity = 1,
+    onActive,
+    onInactive,
+    onStartDrawing,
+    onCompleteDrawing,
     children,
     className,
+    ...restProps
   } = props;
 
   const onClick = () => {
@@ -27,9 +32,13 @@ export const RectTool = (props: RectToolProps) => {
           opacity,
         },
         hooks: {
-          onActive() {
+          onActive(app, tool) {
             selectorPlugin.disable();
+            onActive?.(app, tool);
           },
+          onInactive,
+          onStartDrawing,
+          onCompleteDrawing,
         },
       })
     );
@@ -37,7 +46,7 @@ export const RectTool = (props: RectToolProps) => {
 
   return (
     <>
-      <div className={className} onClick={onClick}>
+      <div className={className} onClick={onClick} {...restProps}>
         {children ?? <button>Rect</button>}
       </div>
     </>

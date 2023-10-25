@@ -6,7 +6,18 @@ import { LineToolProps } from './types';
 
 export const LineTool = (props: LineToolProps) => {
   const { app, selectorPlugin } = usePictode('LineTool');
-  const { stroke = '#000000', strokeWidth = 2, opacity = 1, children, className } = props;
+  const {
+    stroke = '#000000',
+    strokeWidth = 2,
+    opacity = 1,
+    onActive,
+    onInactive,
+    onStartDrawing,
+    onCompleteDrawing,
+    children,
+    className,
+    ...restProps
+  } = props;
 
   const onClick = () => {
     app.setTool(
@@ -17,9 +28,13 @@ export const LineTool = (props: LineToolProps) => {
           opacity,
         },
         hooks: {
-          onActive() {
+          onActive(app, tool) {
             selectorPlugin.disable();
+            onActive?.(app, tool);
           },
+          onInactive,
+          onStartDrawing,
+          onCompleteDrawing,
         },
       })
     );
@@ -27,7 +42,7 @@ export const LineTool = (props: LineToolProps) => {
 
   return (
     <>
-      <div className={className} onClick={onClick}>
+      <div className={className} onClick={onClick} {...restProps}>
         {children ?? <button>Line</button>}
       </div>
     </>

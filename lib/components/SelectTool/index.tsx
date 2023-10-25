@@ -6,18 +6,19 @@ import { SelectToolProps } from './types';
 
 export const SelectTool = (props: SelectToolProps) => {
   const { app, selectorPlugin } = usePictode('SelectTool');
-  const { children, className } = props;
+  const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children, className, ...restProps } = props;
 
   const onClick = () => {
     app.setTool(
       new Select({
         hooks: {
-          onActive() {
+          onActive(app, tool) {
             selectorPlugin.enable();
+            onActive?.(app, tool);
           },
-          onInactive() {
-            selectorPlugin.disable();
-          },
+          onInactive,
+          onStartDrawing,
+          onCompleteDrawing,
         },
       })
     );
@@ -25,7 +26,7 @@ export const SelectTool = (props: SelectToolProps) => {
 
   return (
     <>
-      <div className={className} onClick={onClick}>
+      <div className={className} onClick={onClick} {...restProps}>
         {children ?? <button>Select</button>}
       </div>
     </>

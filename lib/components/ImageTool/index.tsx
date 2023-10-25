@@ -7,7 +7,18 @@ import { ImageToolProps } from './types';
 
 export const ImageTool = (props: ImageToolProps) => {
   const { app, selectorPlugin } = usePictode('LineTool');
-  const { stroke = '#000000', strokeWidth = 2, opacity = 1, children, className } = props;
+  const {
+    stroke = '#000000',
+    strokeWidth = 2,
+    opacity = 1,
+    onActive,
+    onInactive,
+    onStartDrawing,
+    onCompleteDrawing,
+    children,
+    className,
+    ...restProps
+  } = props;
 
   const onClick = async () => {
     const files = await util.selectFile(['.jpg', '.png', '.jpge', '.PNG', '.JPG', '.JPGE', '.svg'], false);
@@ -19,9 +30,13 @@ export const ImageTool = (props: ImageToolProps) => {
         opacity,
       },
       hooks: {
-        onActive() {
+        onActive(app, tool) {
           selectorPlugin.disable();
+          onActive?.(app, tool);
         },
+        onInactive,
+        onStartDrawing,
+        onCompleteDrawing,
       },
     });
     imageTool.imageElement.src = imgSrc;
@@ -30,7 +45,7 @@ export const ImageTool = (props: ImageToolProps) => {
 
   return (
     <>
-      <div className={className} onClick={onClick}>
+      <div className={className} onClick={onClick} {...restProps}>
         {children ?? <button>Image</button>}
       </div>
     </>

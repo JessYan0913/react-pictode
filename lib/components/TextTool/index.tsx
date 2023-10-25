@@ -12,8 +12,13 @@ export const TextTool = (props: TextToolProps) => {
     fill = '#00000000',
     fontSize = 14,
     opacity = 1,
+    onActive,
+    onInactive,
+    onStartDrawing,
+    onCompleteDrawing,
     children,
     className,
+    ...restProps
   } = props;
 
   const onClick = () => {
@@ -27,12 +32,13 @@ export const TextTool = (props: TextToolProps) => {
           opacity,
         },
         hooks: {
-          onActive() {
+          onActive(app, tool) {
             selectorPlugin.disable();
+            onActive?.(app, tool);
           },
-          onInactive() {
-            selectorPlugin.enable();
-          },
+          onInactive,
+          onStartDrawing,
+          onCompleteDrawing,
         },
       })
     );
@@ -40,7 +46,7 @@ export const TextTool = (props: TextToolProps) => {
 
   return (
     <>
-      <div className={className} onClick={onClick}>
+      <div className={className} onClick={onClick} {...restProps}>
         {children ?? <button>Text</button>}
       </div>
     </>

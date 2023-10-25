@@ -1,6 +1,6 @@
-import { util } from '@pictode/core';
+import { ToolHooks, util } from '@pictode/core';
 
-export interface ImageToolProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ImageToolProps extends React.HTMLAttributes<HTMLDivElement>, ToolHooks {
   stroke?: string;
   strokeWidth?: number;
   fill?: string;
