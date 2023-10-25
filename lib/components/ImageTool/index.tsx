@@ -2,6 +2,7 @@ import { util } from '@pictode/core';
 import { ImageTool as Image } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { Icon } from '../Icon';
 
 import { ImageToolProps } from './types';
 
@@ -46,7 +47,7 @@ export const ImageTool = (props: ImageToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <button>Image</button>}
+        {children ?? <Icon type="ImageFiles"></Icon>}
       </div>
     </>
   );

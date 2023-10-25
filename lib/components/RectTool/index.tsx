@@ -1,6 +1,7 @@
 import { RectTool as Rect } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { Icon } from '../Icon';
 
 import { RectToolProps } from './types';
 
@@ -47,7 +48,7 @@ export const RectTool = (props: RectToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <button>Rect</button>}
+        {children ?? <Icon type="RectangleOne"></Icon>}
       </div>
     </>
   );

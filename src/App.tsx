@@ -1,4 +1,4 @@
-import { EllipseTool, ImageTool, LineTool, Pictode, RectTool, SelectTool, Stage, TextTool } from '../';
+import { EllipseTool, ImageTool, LineTool, Pictode, RectTool, SelectTool, Stage, TextTool } from '../lib/main';
 
 import './App.css';
 

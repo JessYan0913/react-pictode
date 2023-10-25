@@ -1,6 +1,7 @@
 import { SelectTool as Select } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { Icon } from '../Icon';
 
 import { SelectToolProps } from './types';
 
@@ -27,7 +28,7 @@ export const SelectTool = (props: SelectToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <button>Select</button>}
+        {children ?? <Icon type="MoveOne"></Icon>}
       </div>
     </>
   );

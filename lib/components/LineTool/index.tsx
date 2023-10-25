@@ -1,6 +1,7 @@
 import { LineTool as Line } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { Icon } from '../Icon';
 
 import { LineToolProps } from './types';
 
@@ -43,7 +44,7 @@ export const LineTool = (props: LineToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <button>Line</button>}
+        {children ?? <Icon type="Clue"></Icon>}
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import { EraserTool as Eraser } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { Icon } from '../Icon';
 
 import { EraserToolProps } from './types';
 
@@ -27,7 +28,7 @@ export const EraserTool = (props: EraserToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <button>Eraser</button>}
+        {children ?? <Icon type="Erase"></Icon>}
       </div>
     </>
   );

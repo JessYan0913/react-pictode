@@ -1,6 +1,7 @@
 import { EllipseTool as Ellipse } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { Icon } from '../Icon';
 
 import { EllipseToolProps } from './types';
 
@@ -45,7 +46,7 @@ export const EllipseTool = (props: EllipseToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <button>Ellipse</button>}
+        {children ?? <Icon type="OvalOne"></Icon>}
       </div>
     </>
   );

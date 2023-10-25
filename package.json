@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@icon-park/react": "^1.4.2",
     "@pictode/core": "0.0.1-beta03",
     "@pictode/plugin-alignment": "0.0.1-beta03",
     "@pictode/plugin-history": "0.0.1-beta03",

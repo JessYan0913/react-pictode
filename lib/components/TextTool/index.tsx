@@ -1,6 +1,7 @@
 import { TextTool as Text } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { Icon } from '../Icon';
 
 import { TextToolProps } from './types';
 
@@ -47,7 +48,7 @@ export const TextTool = (props: TextToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <button>Text</button>}
+        {children ?? <Icon type="Text"></Icon>}
       </div>
     </>
   );
