@@ -5,11 +5,11 @@ specifiers:
   '@commitlint/config-conventional': ^18.0.0
   '@headlessui/react': ^1.7.17
   '@icon-park/react': ^1.4.2
-  '@pictode/core': 0.0.1-beta03
-  '@pictode/plugin-alignment': 0.0.1-beta03
-  '@pictode/plugin-history': 0.0.1-beta03
-  '@pictode/plugin-selector': 0.0.1-beta06
-  '@pictode/tools': 0.0.1-beta03
+  '@pictode/core': ^0.0.1-beta05
+  '@pictode/plugin-alignment': ^0.0.1-beta04
+  '@pictode/plugin-history': ^0.0.1-beta04
+  '@pictode/plugin-selector': ^0.0.1-beta07
+  '@pictode/tools': ^0.0.1-beta04
   '@types/node': ^20.4.8
   '@types/react': ^18.2.15
   '@types/react-dom': ^18.2.7
@@ -43,11 +43,11 @@ specifiers:
 dependencies:
   '@headlessui/react': 1.7.17_biqbaboplfbrettd7655fr4n2y
   '@icon-park/react': 1.4.2_biqbaboplfbrettd7655fr4n2y
-  '@pictode/core': 0.0.1-beta03
-  '@pictode/plugin-alignment': 0.0.1-beta03
-  '@pictode/plugin-history': 0.0.1-beta03
-  '@pictode/plugin-selector': 0.0.1-beta06
-  '@pictode/tools': 0.0.1-beta03
+  '@pictode/core': 0.0.1-beta05
+  '@pictode/plugin-alignment': 0.0.1-beta04_@pictode+core@0.0.1-beta05
+  '@pictode/plugin-history': 0.0.1-beta04_@pictode+core@0.0.1-beta05
+  '@pictode/plugin-selector': 0.0.1-beta07_@pictode+core@0.0.1-beta05
+  '@pictode/tools': 0.0.1-beta05_@pictode+core@0.0.1-beta05
 
 devDependencies:
   '@commitlint/cli': 18.0.0
@@ -884,10 +884,10 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@pictode/core/0.0.1-beta03:
-    resolution: {integrity: sha512-Spkoc8g8BOuvrmDTSRuOzdLYrb94UBrtdtQnNQCh/ZNw7KqNjH3Obvcm7D1lnHfNHJOqr4lnG3OOuGMQ1Dofdg==}
+  /@pictode/core/0.0.1-beta05:
+    resolution: {integrity: sha512-kYvbKC6asO56dudgvFNa0WNV/wVPpLCmUcY5EyRgJlvX2IZ4u8LWJP5Yby8NLAwnWpChqlhBOT/HKoUvewMHkQ==}
     dependencies:
-      '@pictode/utils': 0.0.1-beta02
+      '@pictode/utils': 0.0.1-beta03
       dot: 2.0.0-beta.1
       konva: 9.2.2
       rimraf: 3.0.2
@@ -896,11 +896,13 @@ packages:
       - debug
     dev: false
 
-  /@pictode/plugin-alignment/0.0.1-beta03:
-    resolution: {integrity: sha512-HxeRH1CFjls7aDzk7cLjcBwSwtPy4xCvZvq/N9Gdk5N4Kp/eFmPo0HHDXojtgNuh4n7d/ivDk/Ukg/OXmaaSrw==}
+  /@pictode/plugin-alignment/0.0.1-beta04_@pictode+core@0.0.1-beta05:
+    resolution: {integrity: sha512-fbwOLK59KwR2d/XlyD66H1FpoolqJXnC3v2ELTO6tdvKqwQQ9+pQjFnifvdYTutcKaoNpbpVS79r+gIfa7yJmQ==}
+    peerDependencies:
+      '@pictode/core': 0.0.1-beta05
     dependencies:
-      '@pictode/core': 0.0.1-beta03
-      '@pictode/utils': 0.0.1-beta02
+      '@pictode/core': 0.0.1-beta05
+      '@pictode/utils': 0.0.1-beta03
       dot: 2.0.0-beta.1
       rimraf: 3.0.2
       roughjs: 4.6.5
@@ -908,11 +910,13 @@ packages:
       - debug
     dev: false
 
-  /@pictode/plugin-history/0.0.1-beta03:
-    resolution: {integrity: sha512-w0i4WmSQnVXBhdVg85nhtbtJtVAQTqJbqT6Qyg0LGQyBwma2AfWvGljIIJpSNQPEivUyz3lr7xgO3ciDj/hQ8w==}
+  /@pictode/plugin-history/0.0.1-beta04_@pictode+core@0.0.1-beta05:
+    resolution: {integrity: sha512-NPcruwsCge4bbY5tmi9cKInVcwbAP8/wsSaNfb5D90fVIMVzrSaCtbOy5Lvi74zD3FmvyefemxXFNqh5EI1Ocw==}
+    peerDependencies:
+      '@pictode/core': 0.0.1-beta05
     dependencies:
-      '@pictode/core': 0.0.1-beta03
-      '@pictode/utils': 0.0.1-beta02
+      '@pictode/core': 0.0.1-beta05
+      '@pictode/utils': 0.0.1-beta03
       dot: 2.0.0-beta.1
       rimraf: 3.0.2
       roughjs: 4.6.5
@@ -920,11 +924,13 @@ packages:
       - debug
     dev: false
 
-  /@pictode/plugin-selector/0.0.1-beta06:
-    resolution: {integrity: sha512-Jh6TS59/NQ7i9cQ3Pd03T7fBbWTiVgKRgTFxwoJwFuu+1yAzCJrn8P3hYhguI3bpGJMTl9r2Lb1gsVW9WrR5SQ==}
+  /@pictode/plugin-selector/0.0.1-beta07_@pictode+core@0.0.1-beta05:
+    resolution: {integrity: sha512-yPVWqzOC4PzVbPbyKj57q+YZ/R0vRTct619QFcw6C967XGndMAd3fTUQDZ8urdV7iYPreFwRrsnRB09qI6x1gA==}
+    peerDependencies:
+      '@pictode/core': 0.0.1-beta05
     dependencies:
-      '@pictode/core': 0.0.1-beta03
-      '@pictode/utils': 0.0.1-beta02
+      '@pictode/core': 0.0.1-beta05
+      '@pictode/utils': 0.0.1-beta03
       dot: 2.0.0-beta.1
       rimraf: 3.0.2
       roughjs: 4.6.5
@@ -932,11 +938,13 @@ packages:
       - debug
     dev: false
 
-  /@pictode/tools/0.0.1-beta03:
-    resolution: {integrity: sha512-h7fJllFysF3hMC3jbeJroRsKTF0FSjVxfrI42BWJ7UoWAivDH0Z1PI1C/MbnarLNl2mhp+oSVfnqn81i8cc6Sg==}
+  /@pictode/tools/0.0.1-beta05_@pictode+core@0.0.1-beta05:
+    resolution: {integrity: sha512-oQljejKDTglxG6p7cbJGNO6bIqK2pJDnLI/MI+6icNSGkcsZbusH+/Wh3PsFJWutXtMLzEQ2fAv+UnUxOQywiQ==}
+    peerDependencies:
+      '@pictode/core': 0.0.1-beta05
     dependencies:
-      '@pictode/core': 0.0.1-beta03
-      '@pictode/utils': 0.0.1-beta02
+      '@pictode/core': 0.0.1-beta05
+      '@pictode/utils': 0.0.1-beta03
       dot: 2.0.0-beta.1
       rimraf: 3.0.2
       roughjs: 4.6.5
@@ -944,8 +952,8 @@ packages:
       - debug
     dev: false
 
-  /@pictode/utils/0.0.1-beta02:
-    resolution: {integrity: sha512-NR5lYbudMO5wQirFMiTBUjqWPXdpXW21QMqK2HpvlWsGL2Jph0ot2E9qz3P+tf82QrUuWo8UVRa4A6I9vwSXsg==}
+  /@pictode/utils/0.0.1-beta03:
+    resolution: {integrity: sha512-yFhhGwvCgVaqpXFdri8OfD2kZsbcHrsEu7j9quZ7ohE9ohBWu6PGtXHdo+swoWVWQW1/NeQEdvvTTE9WNxtREA==}
     dependencies:
       axios: 1.5.1
       events: 3.3.0

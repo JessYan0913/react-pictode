@@ -21,11 +21,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@icon-park/react": "^1.4.2",
-    "@pictode/core": "0.0.1-beta03",
-    "@pictode/plugin-alignment": "0.0.1-beta03",
-    "@pictode/plugin-history": "0.0.1-beta03",
-    "@pictode/plugin-selector": "0.0.1-beta06",
-    "@pictode/tools": "0.0.1-beta03"
+    "@pictode/core": "^0.0.1-beta05",
+    "@pictode/plugin-alignment": "^0.0.1-beta04",
+    "@pictode/plugin-history": "^0.0.1-beta04",
+    "@pictode/plugin-selector": "^0.0.1-beta07",
+    "@pictode/tools": "^0.0.1-beta04"
   },
   "peerDependencies": {
     "react": "^18.2.0",
