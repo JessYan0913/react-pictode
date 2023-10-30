@@ -1,4 +1,5 @@
-import { SelectTool as Select } from '@pictode/tools';
+import { useCallback } from 'react';
+import { SelectTool as PictodeSelect } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
@@ -9,9 +10,9 @@ export const SelectTool = (props: SelectToolProps) => {
   const { app } = usePictode('SelectTool');
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children, className, ...restProps } = props;
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     app.setTool(
-      new Select({
+      new PictodeSelect({
         hooks: {
           onActive,
           onInactive,
@@ -20,7 +21,7 @@ export const SelectTool = (props: SelectToolProps) => {
         },
       })
     );
-  };
+  }, [onActive, onInactive, onStartDrawing, onCompleteDrawing, app]);
 
   return (
     <>

@@ -1,4 +1,5 @@
-import { LineTool as Line } from '@pictode/tools';
+import { useCallback } from 'react';
+import { LineTool as PictodeLine } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
@@ -8,9 +9,11 @@ import { LineToolProps } from './types';
 export const LineTool = (props: LineToolProps) => {
   const { app } = usePictode('LineTool');
   const {
-    stroke = '#000000',
-    strokeWidth = 2,
-    opacity = 1,
+    config = {
+      stroke: '#000000',
+      strokeWidth: 2,
+      opacity: 1,
+    },
     onActive,
     onInactive,
     onStartDrawing,
@@ -20,14 +23,10 @@ export const LineTool = (props: LineToolProps) => {
     ...restProps
   } = props;
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     app.setTool(
-      new Line({
-        config: {
-          stroke,
-          strokeWidth,
-          opacity,
-        },
+      new PictodeLine({
+        config,
         hooks: {
           onActive,
           onInactive,
@@ -36,7 +35,7 @@ export const LineTool = (props: LineToolProps) => {
         },
       })
     );
-  };
+  }, [config, onActive, onInactive, onStartDrawing, onCompleteDrawing, app]);
 
   return (
     <>

@@ -2,7 +2,7 @@
   "name": "pictode-react",
   "author": "JessYan0913",
   "private": false,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "files": [
@@ -21,11 +21,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@icon-park/react": "^1.4.2",
-    "@pictode/core": "^0.0.1-beta05",
-    "@pictode/plugin-alignment": "^0.0.1-beta04",
-    "@pictode/plugin-history": "^0.0.1-beta04",
-    "@pictode/plugin-selector": "^0.0.1-beta07",
-    "@pictode/tools": "^0.0.1-beta04"
+    "@pictode/core": "^1.0.0",
+    "@pictode/plugin-alignment": "^1.0.0",
+    "@pictode/plugin-history": "^1.0.0",
+    "@pictode/plugin-selector": "^1.0.0",
+    "@pictode/tools": "^1.0.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",

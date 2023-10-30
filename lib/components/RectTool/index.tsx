@@ -1,4 +1,5 @@
-import { RectTool as Rect } from '@pictode/tools';
+import { useCallback } from 'react';
+import { RectTool as PictodeRect } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
@@ -8,11 +9,13 @@ import { RectToolProps } from './types';
 export const RectTool = (props: RectToolProps) => {
   const { app } = usePictode('RectTool');
   const {
-    stroke = '#000000',
-    strokeWidth = 2,
-    fill = '#00000000',
-    cornerRadius = 0,
-    opacity = 1,
+    config = {
+      stroke: '#000000',
+      strokeWidth: 2,
+      fill: '#00000000',
+      cornerRadius: 0,
+      opacity: 1,
+    },
     onActive,
     onInactive,
     onStartDrawing,
@@ -22,16 +25,10 @@ export const RectTool = (props: RectToolProps) => {
     ...restProps
   } = props;
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     app.setTool(
-      new Rect({
-        config: {
-          stroke,
-          strokeWidth,
-          fill,
-          cornerRadius,
-          opacity,
-        },
+      new PictodeRect({
+        config,
         hooks: {
           onActive,
           onInactive,
@@ -40,7 +37,7 @@ export const RectTool = (props: RectToolProps) => {
         },
       })
     );
-  };
+  }, [config, onActive, onInactive, onStartDrawing, onCompleteDrawing, app]);
 
   return (
     <>

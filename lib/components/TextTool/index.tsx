@@ -1,4 +1,5 @@
-import { TextTool as Text } from '@pictode/tools';
+import { useCallback } from 'react';
+import { TextTool as PictodeText } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
@@ -8,11 +9,13 @@ import { TextToolProps } from './types';
 export const TextTool = (props: TextToolProps) => {
   const { app } = usePictode('RectTool');
   const {
-    stroke = '#000000',
-    strokeWidth = 2,
-    fill = '#00000000',
-    fontSize = 14,
-    opacity = 1,
+    config = {
+      stroke: '#000000',
+      strokeWidth: 2,
+      fill: '#00000000',
+      fontSize: 14,
+      opacity: 1,
+    },
     onActive,
     onInactive,
     onStartDrawing,
@@ -22,16 +25,10 @@ export const TextTool = (props: TextToolProps) => {
     ...restProps
   } = props;
 
-  const onClick = () => {
+  const onClick = useCallback(() => {
     app.setTool(
-      new Text({
-        config: {
-          stroke,
-          strokeWidth,
-          fill,
-          fontSize,
-          opacity,
-        },
+      new PictodeText({
+        config,
         hooks: {
           onActive,
           onInactive,
@@ -40,7 +37,7 @@ export const TextTool = (props: TextToolProps) => {
         },
       })
     );
-  };
+  }, [config, onActive, onInactive, onStartDrawing, onCompleteDrawing, app]);
 
   return (
     <>
