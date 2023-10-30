@@ -1,9 +1,10 @@
-import { App } from '@pictode/core';
-import { SelectorPlugin } from '@pictode/plugin-selector';
+import { App, Plugin } from '@pictode/core';
 
-export interface StageProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface PictodeProps extends React.HTMLAttributes<HTMLDivElement> {
+  plugins?: Plugin[];
+}
 
 export interface PictodeContextType {
   app: App;
-  selectorPlugin: SelectorPlugin;
+  plugins: Plugin[];
 }

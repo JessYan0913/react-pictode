@@ -1,31 +1,31 @@
-import { createContext, forwardRef, useImperativeHandle, useState } from 'react';
+import { createContext, forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { App } from '@pictode/core';
-import { HistoryPlugin } from '@pictode/plugin-history';
-import { SelectorPlugin } from '@pictode/plugin-selector';
 
-import { PictodeContextType, StageProps } from './types';
+import { PictodeContextType, PictodeProps } from './types';
 
 export const PictodeContext = createContext<PictodeContextType | null>(null);
 
-export const Pictode = forwardRef((props: StageProps, ref: React.ForwardedRef<PictodeContextType>) => {
-  const { className, children } = props;
+export const Pictode = forwardRef((props: PictodeProps, ref: React.ForwardedRef<PictodeContextType>) => {
+  const { plugins = [], className, children } = props;
   const [app] = useState<App>(new App());
-  const [selectorPlugin] = useState<SelectorPlugin>(new SelectorPlugin());
-  const [historyPlugin] = useState<HistoryPlugin>(new HistoryPlugin());
-  app.use(selectorPlugin);
-  app.use(historyPlugin);
+
+  const contextValue = useMemo(() => ({ app, plugins }), [app, plugins]);
+
+  useEffect(() => {
+    plugins?.forEach((plugin) => app.use(plugin));
+  }, [plugins, app]);
 
   useImperativeHandle(
     ref,
     () => ({
       app,
-      selectorPlugin,
+      plugins,
     }),
-    [app, selectorPlugin]
+    [app, plugins]
   );
 
   return (
-    <PictodeContext.Provider value={{ app, selectorPlugin }}>
+    <PictodeContext.Provider value={contextValue}>
       <div className={`pe-w-full pe-h-full ${className}`}>{children}</div>
     </PictodeContext.Provider>
   );

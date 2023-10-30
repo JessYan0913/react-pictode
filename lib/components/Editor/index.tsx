@@ -1,5 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { App } from '@pictode/core';
+import { HistoryPlugin } from '@pictode/plugin-history';
+import { SelectorPlugin } from '@pictode/plugin-selector';
 
 import { EllipseTool } from '../EllipseTool';
 import { Icon } from '../Icon';
@@ -19,6 +21,8 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   const [activeTool, setActiveTool] = useState<string>('');
   const [app, setApp] = useState<App>();
   const pictodeRef = useRef<PictodeContextType>(null);
+  const selectorPlugin = new SelectorPlugin();
+  const historyPlugin = new HistoryPlugin();
 
   useImperativeHandle(ref, () => pictodeRef);
 
@@ -34,9 +38,9 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   const onActiveTool = (tool: string) => () => {
     setActiveTool(tool);
     if (tool !== 'selectTool') {
-      pictodeRef.current?.selectorPlugin.disable();
+      selectorPlugin.disable();
     } else {
-      pictodeRef.current?.selectorPlugin.enable();
+      selectorPlugin.enable();
     }
   };
 
@@ -64,7 +68,11 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   return (
     <>
       <div className={`${className} pe-w-full pe-h-full`}>
-        <Pictode className={'pe-w-full pe-h-full pe-flex pe-flex-col pe-gap-2'} ref={pictodeRef}>
+        <Pictode
+          className={'pe-w-full pe-h-full pe-flex pe-flex-col pe-gap-2'}
+          ref={pictodeRef}
+          plugins={[selectorPlugin, historyPlugin]}
+        >
           <div className={'pe-w-full pe-flex pe-flex-row pe-flex-wrap pe-justify-around pe-bg-zinc-100 pe-p-2'}>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="ZoomOut" onClick={onZoomOut}></Icon>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="ZoomIn" onClick={onZoomIn}></Icon>
