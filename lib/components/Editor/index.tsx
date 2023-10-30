@@ -38,9 +38,9 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   const onActiveTool = (tool: string) => () => {
     setActiveTool(tool);
     if (tool !== 'selectTool') {
-      selectorPlugin.disable();
+      app?.disablePlugin(selectorPlugin.name);
     } else {
-      selectorPlugin.enable();
+      app?.enablePlugin(selectorPlugin.name);
     }
   };
 
