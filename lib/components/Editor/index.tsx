@@ -84,7 +84,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
             <ImageTool className={toolClass('imageTool')} onActive={onActiveTool('imageTool')}></ImageTool>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="Return" onClick={onUndo}></Icon>
           </div>
-          <Stage className={'pe-h-full'}></Stage>
+          <Stage style={{ width: '500px', height: '500px' }}></Stage>
         </Pictode>
       </div>
     </>

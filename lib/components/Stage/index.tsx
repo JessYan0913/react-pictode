@@ -19,7 +19,7 @@ export const Stage = (props: StageProps) => {
 
   return (
     <>
-      <div className={`${className} pe-w-full pe-h-full`} ref={stageRef}></div>
+      <div className={`${className ?? ''}`} ref={stageRef}></div>
     </>
   );
 };
