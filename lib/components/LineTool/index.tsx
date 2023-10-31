@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { LineTool as PictodeLineTool } from '@pictode/tools';
 
-import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
@@ -22,9 +21,7 @@ export const LineTool = (props: LineToolProps) => {
     className,
     ...restProps
   } = props;
-  const { app } = usePictode(PictodeLineTool.name);
-  const { active } = useActive(PictodeLineTool.name);
-
+  const { app, tool: activeTool } = usePictode(PictodeLineTool.name);
   const tool = useMemo(
     () =>
       new PictodeLineTool({
@@ -38,6 +35,7 @@ export const LineTool = (props: LineToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
+  const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   const onClick = useCallback(() => {
     app.setTool(tool);
@@ -46,7 +44,7 @@ export const LineTool = (props: LineToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {typeof children === 'function' ? children({ active, tool }) : children ?? <Icon type="Clue"></Icon>}
+        {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Clue"></Icon>}
       </div>
     </>
   );

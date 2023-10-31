@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { RectTool as PictodeRectTool } from '@pictode/tools';
 
-import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
@@ -24,9 +23,7 @@ export const RectTool = (props: RectToolProps) => {
     className,
     ...restProps
   } = props;
-  const { app } = usePictode(PictodeRectTool.name);
-  const { active } = useActive(PictodeRectTool.name);
-
+  const { app, tool: activeTool } = usePictode(PictodeRectTool.name);
   const tool = useMemo(
     () =>
       new PictodeRectTool({
@@ -40,6 +37,7 @@ export const RectTool = (props: RectToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
+  const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   const onClick = useCallback(() => {
     app.setTool(tool);
@@ -48,7 +46,9 @@ export const RectTool = (props: RectToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {typeof children === 'function' ? children({ active, tool }) : children ?? <Icon type="RectangleOne"></Icon>}
+        {typeof children === 'function'
+          ? children({ app, active, tool })
+          : children ?? <Icon type="RectangleOne"></Icon>}
       </div>
     </>
   );

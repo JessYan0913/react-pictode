@@ -10,7 +10,8 @@ export interface ToolProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'c
   children?:
     | ReactNode
     | FC<{
-        active: boolean;
+        app: App;
         tool: Tool;
+        active: boolean;
       }>;
 }

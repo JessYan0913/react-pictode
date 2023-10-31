@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { TextTool as PictodeText } from '@pictode/tools';
 
-import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
@@ -24,8 +23,7 @@ export const TextTool = (props: TextToolProps) => {
     className,
     ...restProps
   } = props;
-  const { app } = usePictode(PictodeText.name);
-  const { active } = useActive(PictodeText.name);
+  const { app, tool: activeTool } = usePictode(PictodeText.name);
   const tool = useMemo(
     () =>
       new PictodeText({
@@ -39,6 +37,7 @@ export const TextTool = (props: TextToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
+  const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   const onClick = useCallback(() => {
     app.setTool(tool);
@@ -47,7 +46,7 @@ export const TextTool = (props: TextToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {typeof children === 'function' ? children({ active, tool }) : children ?? <Icon type="Text"></Icon>}
+        {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Text"></Icon>}
       </div>
     </>
   );

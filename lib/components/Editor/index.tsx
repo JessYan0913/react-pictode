@@ -20,7 +20,6 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   const { className } = props;
   const [app, setApp] = useState<App>();
   const pictodeRef = useRef<PictodeContextType>(null);
-  const [rectConfig] = useState({ stroke: '#ff00ff', strokeWidth: 2 });
   const selectorPlugin = new SelectorPlugin();
   const historyPlugin = new HistoryPlugin();
 
@@ -82,7 +81,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 </>
               )}
             </SelectTool>
-            <RectTool config={rectConfig} onActive={onActiveTool('rectTool')}>
+            <RectTool onActive={onActiveTool('rectTool')}>
               {({ active, tool }) => (
                 <>
                   <Icon

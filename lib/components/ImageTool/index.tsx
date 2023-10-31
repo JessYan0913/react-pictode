@@ -2,7 +2,6 @@ import { useCallback, useMemo, useState } from 'react';
 import { util } from '@pictode/core';
 import { ImageTool as PictodeImageTool } from '@pictode/tools';
 
-import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
@@ -22,8 +21,7 @@ export const ImageTool = (props: ImageToolProps) => {
     className,
     ...restProps
   } = props;
-  const { app } = usePictode('LineTool');
-  const { active } = useActive(PictodeImageTool.name);
+  const { app, tool: activeTool } = usePictode(PictodeImageTool.name);
   const [imageSrc, setImageSrc] = useState('');
 
   const image = useMemo(() => {
@@ -48,6 +46,7 @@ export const ImageTool = (props: ImageToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing, image]
   );
+  const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   const onClick = useCallback(async () => {
     const files = await util.selectFile(['.jpg', '.png', '.jpge', '.PNG', '.JPG', '.JPGE', '.svg'], false);
@@ -58,7 +57,7 @@ export const ImageTool = (props: ImageToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {typeof children === 'function' ? children({ active, tool }) : children ?? <Icon type="ImageFiles"></Icon>}
+        {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="ImageFiles"></Icon>}
       </div>
     </>
   );
