@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { LineTool as PictodeLineTool } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
@@ -18,8 +18,6 @@ export const LineTool = (props: LineToolProps) => {
     onStartDrawing,
     onCompleteDrawing,
     children,
-    className,
-    ...restProps
   } = props;
   const { app, tool: activeTool } = usePictode(PictodeLineTool.name);
   const tool = useMemo(
@@ -37,15 +35,11 @@ export const LineTool = (props: LineToolProps) => {
   );
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
-  const onClick = useCallback(() => {
-    app.setTool(tool);
-  }, [tool, app]);
-
   return (
     <>
-      <div className={className} onClick={onClick} {...restProps}>
+      <Fragment>
         {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Clue"></Icon>}
-      </div>
+      </Fragment>
     </>
   );
 };

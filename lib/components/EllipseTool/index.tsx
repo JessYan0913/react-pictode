@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { EllipseTool as PictodeEllipseTool } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
@@ -14,8 +14,6 @@ export const EllipseTool = (props: EllipseToolProps) => {
     onStartDrawing,
     onCompleteDrawing,
     children,
-    className,
-    ...restProps
   } = props;
 
   const { app, tool: activeTool } = usePictode(PictodeEllipseTool.name);
@@ -34,15 +32,11 @@ export const EllipseTool = (props: EllipseToolProps) => {
   );
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
-  const onClick = useCallback(() => {
-    app.setTool(tool);
-  }, [tool, app]);
-
   return (
     <>
-      <div className={className} onClick={onClick} {...restProps}>
+      <Fragment>
         {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="OvalOne"></Icon>}
-      </div>
+      </Fragment>
     </>
   );
 };

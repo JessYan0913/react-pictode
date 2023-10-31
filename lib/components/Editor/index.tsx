@@ -72,102 +72,57 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="ZoomOut" onClick={onZoomOut}></Icon>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="ZoomIn" onClick={onZoomIn}></Icon>
             <SelectTool onActive={onActiveTool('selectTool')}>
-              {({ active }) => (
+              {({ app, active, tool }) => (
                 <>
                   <Icon
                     className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="MoveOne"
+                    onClick={() => app.setTool(tool)}
                   ></Icon>
                 </>
               )}
             </SelectTool>
             <RectTool onActive={onActiveTool('rectTool')}>
-              {({ active, tool }) => (
+              {({ app, active, tool }) => (
                 <>
                   <Icon
                     className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="RectangleOne"
+                    onClick={() => app.setTool(tool)}
                   ></Icon>
-                  {active && (
-                    <div className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}>
-                      <button
-                        onClick={() => {
-                          tool.config = {
-                            stroke: '#ff0000',
-                            strokeWidth: 8,
-                          };
-                        }}
-                      >
-                        粗
-                      </button>
-                      <button
-                        onClick={() => {
-                          tool.config = {
-                            stroke: '#ff0000',
-                            strokeWidth: 2,
-                          };
-                        }}
-                      >
-                        细
-                      </button>
-                    </div>
-                  )}
                 </>
               )}
             </RectTool>
             <EllipseTool onActive={onActiveTool('ellipseTool')}>
-              {({ active, tool }) => (
+              {({ app, active, tool }) => (
                 <>
                   <Icon
                     className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="OvalOne"
+                    onClick={() => app.setTool(tool)}
                   ></Icon>
-                  {active && (
-                    <div className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}>
-                      <button
-                        onClick={() => {
-                          tool.config = {
-                            stroke: '#ff0000',
-                            strokeWidth: 8,
-                          };
-                        }}
-                      >
-                        加粗
-                      </button>
-                    </div>
-                  )}
                 </>
               )}
             </EllipseTool>
             <LineTool onActive={onActiveTool('lineTool')}>
-              {({ active }) => (
+              {({ app, active, tool }) => (
                 <>
                   <Icon
                     className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="Clue"
+                    onClick={() => app.setTool(tool)}
                   ></Icon>
-                  {active && (
-                    <div
-                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
-                      onClick={() => console.log('点击')}
-                    ></div>
-                  )}
                 </>
               )}
             </LineTool>
             <TextTool onActive={onActiveTool('textTool')}>
-              {({ active }) => (
+              {({ app, active, tool }) => (
                 <>
                   <Icon
                     className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="Text"
+                    onClick={() => app.setTool(tool)}
                   ></Icon>
-                  {active && (
-                    <div
-                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
-                      onClick={() => console.log('点击')}
-                    ></div>
-                  )}
                 </>
               )}
             </TextTool>
@@ -178,12 +133,6 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                     className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="ImageFiles"
                   ></Icon>
-                  {active && (
-                    <div
-                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
-                      onClick={() => console.log('点击')}
-                    ></div>
-                  )}
                 </>
               )}
             </ImageTool>

@@ -6,7 +6,7 @@ export interface PictodeContextType {
   plugins: Plugin[];
 }
 
-export interface ToolProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>, ToolHooks {
+export interface ToolProps extends ToolHooks {
   children?:
     | ReactNode
     | FC<{

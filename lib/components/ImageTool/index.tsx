@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useState } from 'react';
-import { util } from '@pictode/core';
+import { Fragment, useMemo, useState } from 'react';
+// import { util } from '@pictode/core';
 import { ImageTool as PictodeImageTool } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
@@ -18,11 +18,9 @@ export const ImageTool = (props: ImageToolProps) => {
     onStartDrawing,
     onCompleteDrawing,
     children,
-    className,
-    ...restProps
   } = props;
   const { app, tool: activeTool } = usePictode(PictodeImageTool.name);
-  const [imageSrc, setImageSrc] = useState('');
+  const [imageSrc] = useState('');
 
   const image = useMemo(() => {
     const image = new Image();
@@ -48,17 +46,17 @@ export const ImageTool = (props: ImageToolProps) => {
   );
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
-  const onClick = useCallback(async () => {
-    const files = await util.selectFile(['.jpg', '.png', '.jpge', '.PNG', '.JPG', '.JPGE', '.svg'], false);
-    setImageSrc(await util.readeFile<string>((reader: FileReader) => reader.readAsDataURL(files[0])));
-    app.setTool(tool);
-  }, [tool, app]);
+  // const onClick = useCallback(async () => {
+  //   const files = await util.selectFile(['.jpg', '.png', '.jpge', '.PNG', '.JPG', '.JPGE', '.svg'], false);
+  //   setImageSrc(await util.readeFile<string>((reader: FileReader) => reader.readAsDataURL(files[0])));
+  //   app.setTool(tool);
+  // }, [tool, app]);
 
   return (
     <>
-      <div className={className} onClick={onClick} {...restProps}>
+      <Fragment>
         {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="ImageFiles"></Icon>}
-      </div>
+      </Fragment>
     </>
   );
 };
