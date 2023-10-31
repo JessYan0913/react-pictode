@@ -7,7 +7,7 @@ import { StageProps } from './types';
 export const Stage = (props: StageProps) => {
   const { app } = usePictode('Stage');
 
-  const { className } = props;
+  const { className, ...restProps } = props;
 
   const stageRef = useRef<HTMLDivElement | null>(null);
 
@@ -19,7 +19,7 @@ export const Stage = (props: StageProps) => {
 
   return (
     <>
-      <div className={`${className ?? ''}`} ref={stageRef}></div>
+      <div className={`${className ?? ''}`} ref={stageRef} {...restProps}></div>
     </>
   );
 };

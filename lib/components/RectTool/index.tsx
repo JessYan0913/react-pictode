@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { RectTool as PictodeRect } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
@@ -25,6 +25,12 @@ export const RectTool = (props: RectToolProps) => {
     ...restProps
   } = props;
 
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    setActive(app.curTool?.name === PictodeRect.name);
+  }, [app.curTool]);
+
   const onClick = useCallback(() => {
     app.setTool(
       new PictodeRect({
@@ -42,7 +48,7 @@ export const RectTool = (props: RectToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <Icon type="RectangleOne"></Icon>}
+        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="RectangleOne"></Icon>}
       </div>
     </>
   );

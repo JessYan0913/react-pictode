@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { EraserTool as PictodeEraser } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
@@ -9,6 +9,12 @@ import { EraserToolProps } from './types';
 export const EraserTool = (props: EraserToolProps) => {
   const { app } = usePictode('EraserTool');
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children, className, ...restProps } = props;
+
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    setActive(app.curTool?.name === PictodeEraser.name);
+  }, [app.curTool]);
 
   const onClick = useCallback(() => {
     app.setTool(
@@ -26,7 +32,7 @@ export const EraserTool = (props: EraserToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <Icon type="Erase"></Icon>}
+        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="Erase"></Icon>}
       </div>
     </>
   );

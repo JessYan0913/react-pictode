@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { EllipseTool as PictodeEllipse } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
@@ -19,6 +19,12 @@ export const EllipseTool = (props: EllipseToolProps) => {
     ...restProps
   } = props;
 
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    setActive(app.curTool?.name === PictodeEllipse.name);
+  }, [app.curTool]);
+
   const onClick = useCallback(() => {
     app.setTool(
       new PictodeEllipse({
@@ -36,7 +42,7 @@ export const EllipseTool = (props: EllipseToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <Icon type="OvalOne"></Icon>}
+        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="OvalOne"></Icon>}
       </div>
     </>
   );

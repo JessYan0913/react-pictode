@@ -37,10 +37,10 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
 
   const onActiveTool = (tool: string) => () => {
     setActiveTool(tool);
-    if (tool !== 'selectTool') {
-      app?.disablePlugin(selectorPlugin.name);
-    } else {
+    if (tool === 'selectTool') {
       app?.enablePlugin(selectorPlugin.name);
+    } else {
+      app?.disablePlugin(selectorPlugin.name);
     }
   };
 
@@ -77,14 +77,23 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="ZoomOut" onClick={onZoomOut}></Icon>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="ZoomIn" onClick={onZoomIn}></Icon>
             <SelectTool className={toolClass('selectTool')} onActive={onActiveTool('selectTool')}></SelectTool>
-            <RectTool className={toolClass('rectTool')} onActive={onActiveTool('rectTool')}></RectTool>
+            <RectTool className={toolClass('rectTool')} onActive={onActiveTool('rectTool')}>
+              {() => (
+                <>
+                  <Icon type="RectangleOne"></Icon>
+                  {activeTool === 'rectTool' && (
+                    <div className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}></div>
+                  )}
+                </>
+              )}
+            </RectTool>
             <EllipseTool className={toolClass('ellipseTool')} onActive={onActiveTool('ellipseTool')}></EllipseTool>
             <LineTool className={toolClass('lineTool')} onActive={onActiveTool('lineTool')}></LineTool>
             <TextTool className={toolClass('textTool')} onActive={onActiveTool('textTool')}></TextTool>
             <ImageTool className={toolClass('imageTool')} onActive={onActiveTool('imageTool')}></ImageTool>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="Return" onClick={onUndo}></Icon>
           </div>
-          <Stage style={{ width: '500px', height: '500px' }}></Stage>
+          <Stage className={'pe-w-full pe-h-full'}></Stage>
         </Pictode>
       </div>
     </>
