@@ -2,13 +2,13 @@ import { useCallback } from 'react';
 import { util } from '@pictode/core';
 import { ImageTool as PictodeImage } from '@pictode/tools';
 
+import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { ImageToolProps } from './types';
 
 export const ImageTool = (props: ImageToolProps) => {
-  const { app } = usePictode('LineTool');
   const {
     config = {
       stroke: '#ffffff00',
@@ -23,6 +23,8 @@ export const ImageTool = (props: ImageToolProps) => {
     className,
     ...restProps
   } = props;
+  const { app } = usePictode('LineTool');
+  const { active } = useActive(PictodeImage.name);
 
   const onClick = useCallback(async () => {
     const imageElement = new Image();
@@ -46,7 +48,7 @@ export const ImageTool = (props: ImageToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <Icon type="ImageFiles"></Icon>}
+        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="ImageFiles"></Icon>}
       </div>
     </>
   );

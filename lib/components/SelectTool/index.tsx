@@ -1,14 +1,16 @@
 import { useCallback } from 'react';
 import { SelectTool as PictodeSelect } from '@pictode/tools';
 
+import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { SelectToolProps } from './types';
 
 export const SelectTool = (props: SelectToolProps) => {
-  const { app } = usePictode('SelectTool');
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children, className, ...restProps } = props;
+  const { app } = usePictode(PictodeSelect.name);
+  const { active } = useActive(PictodeSelect.name);
 
   const onClick = useCallback(() => {
     app.setTool(
@@ -26,7 +28,7 @@ export const SelectTool = (props: SelectToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <Icon type="MoveOne"></Icon>}
+        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="MoveOne"></Icon>}
       </div>
     </>
   );

@@ -18,7 +18,6 @@ import { EditorProps } from './types';
 
 export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<React.RefObject<PictodeContextType>>) => {
   const { className } = props;
-  const [activeTool, setActiveTool] = useState<string>('');
   const [app, setApp] = useState<App>();
   const pictodeRef = useRef<PictodeContextType>(null);
   const selectorPlugin = new SelectorPlugin();
@@ -32,11 +31,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
     }
   }, [pictodeRef]);
 
-  const toolClass = (tool: string): string =>
-    `pe-rounded ${activeTool === tool ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`;
-
   const onActiveTool = (tool: string) => () => {
-    setActiveTool(tool);
     if (tool === 'selectTool') {
       app?.enablePlugin(selectorPlugin.name);
     } else {
@@ -76,21 +71,96 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
           <div className={'pe-w-full pe-flex pe-flex-row pe-flex-wrap pe-justify-around pe-bg-zinc-100 pe-p-2'}>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="ZoomOut" onClick={onZoomOut}></Icon>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="ZoomIn" onClick={onZoomIn}></Icon>
-            <SelectTool className={toolClass('selectTool')} onActive={onActiveTool('selectTool')}></SelectTool>
-            <RectTool className={toolClass('rectTool')} onActive={onActiveTool('rectTool')}>
-              {() => (
+            <SelectTool onActive={onActiveTool('selectTool')}>
+              {({ active }) => (
                 <>
-                  <Icon type="RectangleOne"></Icon>
-                  {activeTool === 'rectTool' && (
-                    <div className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}></div>
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="MoveOne"
+                  ></Icon>
+                </>
+              )}
+            </SelectTool>
+            <RectTool onActive={onActiveTool('rectTool')}>
+              {({ active }) => (
+                <>
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="RectangleOne"
+                  ></Icon>
+                  {active && (
+                    <div
+                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
+                      onClick={() => console.log('点击')}
+                    ></div>
                   )}
                 </>
               )}
             </RectTool>
-            <EllipseTool className={toolClass('ellipseTool')} onActive={onActiveTool('ellipseTool')}></EllipseTool>
-            <LineTool className={toolClass('lineTool')} onActive={onActiveTool('lineTool')}></LineTool>
-            <TextTool className={toolClass('textTool')} onActive={onActiveTool('textTool')}></TextTool>
-            <ImageTool className={toolClass('imageTool')} onActive={onActiveTool('imageTool')}></ImageTool>
+            <EllipseTool onActive={onActiveTool('ellipseTool')}>
+              {({ active }) => (
+                <>
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="OvalOne"
+                  ></Icon>
+                  {active && (
+                    <div
+                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
+                      onClick={() => console.log('点击')}
+                    ></div>
+                  )}
+                </>
+              )}
+            </EllipseTool>
+            <LineTool onActive={onActiveTool('lineTool')}>
+              {({ active }) => (
+                <>
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="Clue"
+                  ></Icon>
+                  {active && (
+                    <div
+                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
+                      onClick={() => console.log('点击')}
+                    ></div>
+                  )}
+                </>
+              )}
+            </LineTool>
+            <TextTool onActive={onActiveTool('textTool')}>
+              {({ active }) => (
+                <>
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="Text"
+                  ></Icon>
+                  {active && (
+                    <div
+                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
+                      onClick={() => console.log('点击')}
+                    ></div>
+                  )}
+                </>
+              )}
+            </TextTool>
+            <ImageTool onActive={onActiveTool('imageTool')}>
+              {({ active }) => (
+                <>
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="ImageFiles"
+                  ></Icon>
+                  {active && (
+                    <div
+                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
+                      onClick={() => console.log('点击')}
+                    ></div>
+                  )}
+                </>
+              )}
+            </ImageTool>
             <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="Return" onClick={onUndo}></Icon>
           </div>
           <Stage className={'pe-w-full pe-h-full'}></Stage>

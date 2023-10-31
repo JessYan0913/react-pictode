@@ -1,6 +1,7 @@
-import { ToolHooks } from '@pictode/core';
 import { LineToolConfig } from '@pictode/tools';
 
-export interface LineToolProps extends React.HTMLAttributes<HTMLDivElement>, ToolHooks {
+import { ToolProps } from '../types';
+
+export interface LineToolProps extends ToolProps {
   config?: LineToolConfig;
 }

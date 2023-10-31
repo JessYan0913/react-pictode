@@ -1,3 +1,3 @@
-import { ToolHooks } from '@pictode/core';
+import { ToolProps } from '../types';
 
-export interface SelectToolProps extends React.HTMLAttributes<HTMLDivElement>, ToolHooks {}
+export interface SelectToolProps extends ToolProps {}

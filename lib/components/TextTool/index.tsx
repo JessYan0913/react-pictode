@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { TextTool as PictodeText } from '@pictode/tools';
 
+import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { TextToolProps } from './types';
 
 export const TextTool = (props: TextToolProps) => {
-  const { app } = usePictode('RectTool');
   const {
     config = {
       stroke: '#000000',
@@ -24,6 +24,8 @@ export const TextTool = (props: TextToolProps) => {
     className,
     ...restProps
   } = props;
+  const { app } = usePictode(PictodeText.name);
+  const { active } = useActive(PictodeText.name);
 
   const onClick = useCallback(() => {
     app.setTool(
@@ -42,7 +44,7 @@ export const TextTool = (props: TextToolProps) => {
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {children ?? <Icon type="Text"></Icon>}
+        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="Text"></Icon>}
       </div>
     </>
   );

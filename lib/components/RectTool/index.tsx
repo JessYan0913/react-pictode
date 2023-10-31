@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { RectTool as PictodeRect } from '@pictode/tools';
 
+import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { RectToolProps } from './types';
 
 export const RectTool = (props: RectToolProps) => {
-  const { app } = usePictode('RectTool');
   const {
     config = {
       stroke: '#000000',
@@ -24,12 +24,8 @@ export const RectTool = (props: RectToolProps) => {
     className,
     ...restProps
   } = props;
-
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    setActive(app.curTool?.name === PictodeRect.name);
-  }, [app.curTool]);
+  const { app } = usePictode(PictodeRect.name);
+  const { active } = useActive(PictodeRect.name);
 
   const onClick = useCallback(() => {
     app.setTool(

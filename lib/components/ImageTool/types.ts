@@ -1,6 +1,7 @@
-import { ToolHooks } from '@pictode/core';
 import { ImageConfig } from '@pictode/tools';
 
-export interface ImageToolProps extends React.HTMLAttributes<HTMLDivElement>, ToolHooks {
+import { ToolProps } from '../types';
+
+export interface ImageToolProps extends ToolProps {
   config?: ImageConfig;
 }

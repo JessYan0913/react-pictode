@@ -1,6 +1,7 @@
-import { ToolHooks } from '@pictode/core';
 import { TextToolConfig } from '@pictode/tools';
 
-export interface TextToolProps extends React.HTMLAttributes<HTMLDivElement>, ToolHooks {
+import { ToolProps } from '../types';
+
+export interface TextToolProps extends ToolProps {
   config?: TextToolConfig;
 }

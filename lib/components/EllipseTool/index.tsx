@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { EllipseTool as PictodeEllipse } from '@pictode/tools';
 
+import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { EllipseToolProps } from './types';
 
 export const EllipseTool = (props: EllipseToolProps) => {
-  const { app } = usePictode('EllipseTool');
   const {
     config = { stroke: '#000000', strokeWidth: 2, fill: '#00000000', opacity: 1 },
     onActive,
@@ -19,11 +19,8 @@ export const EllipseTool = (props: EllipseToolProps) => {
     ...restProps
   } = props;
 
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    setActive(app.curTool?.name === PictodeEllipse.name);
-  }, [app.curTool]);
+  const { app } = usePictode(PictodeEllipse.name);
+  const { active } = useActive(PictodeEllipse.name);
 
   const onClick = useCallback(() => {
     app.setTool(
