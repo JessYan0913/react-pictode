@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { RectTool as PictodeRect } from '@pictode/tools';
+import { useCallback, useMemo } from 'react';
+import { RectTool as PictodeRectTool } from '@pictode/tools';
 
 import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
@@ -24,12 +24,12 @@ export const RectTool = (props: RectToolProps) => {
     className,
     ...restProps
   } = props;
-  const { app } = usePictode(PictodeRect.name);
-  const { active } = useActive(PictodeRect.name);
+  const { app } = usePictode(PictodeRectTool.name);
+  const { active } = useActive(PictodeRectTool.name);
 
-  const onClick = useCallback(() => {
-    app.setTool(
-      new PictodeRect({
+  const tool = useMemo(
+    () =>
+      new PictodeRectTool({
         config,
         hooks: {
           onActive,
@@ -37,14 +37,18 @@ export const RectTool = (props: RectToolProps) => {
           onStartDrawing,
           onCompleteDrawing,
         },
-      })
-    );
-  }, [config, onActive, onInactive, onStartDrawing, onCompleteDrawing, app]);
+      }),
+    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
+  );
+
+  const onClick = useCallback(() => {
+    app.setTool(tool);
+  }, [tool, app]);
 
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="RectangleOne"></Icon>}
+        {typeof children === 'function' ? children({ active, tool }) : children ?? <Icon type="RectangleOne"></Icon>}
       </div>
     </>
   );

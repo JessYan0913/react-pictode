@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react';
-import type { App, Plugin, ToolHooks } from '@pictode/core';
+import type { App, Plugin, Tool, ToolHooks } from '@pictode/core';
 
 export interface PictodeContextType {
   app: App;
@@ -11,5 +11,6 @@ export interface ToolProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'c
     | ReactNode
     | FC<{
         active: boolean;
+        tool: Tool;
       }>;
 }

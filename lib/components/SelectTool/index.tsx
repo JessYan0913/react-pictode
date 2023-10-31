@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { SelectTool as PictodeSelect } from '@pictode/tools';
+import { useCallback, useMemo } from 'react';
+import { SelectTool as PictodeSelectTool } from '@pictode/tools';
 
 import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
@@ -9,26 +9,30 @@ import { SelectToolProps } from './types';
 
 export const SelectTool = (props: SelectToolProps) => {
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children, className, ...restProps } = props;
-  const { app } = usePictode(PictodeSelect.name);
-  const { active } = useActive(PictodeSelect.name);
+  const { app } = usePictode(PictodeSelectTool.name);
+  const { active } = useActive(PictodeSelectTool.name);
 
-  const onClick = useCallback(() => {
-    app.setTool(
-      new PictodeSelect({
+  const tool = useMemo(
+    () =>
+      new PictodeSelectTool({
         hooks: {
           onActive,
           onInactive,
           onStartDrawing,
           onCompleteDrawing,
         },
-      })
-    );
-  }, [onActive, onInactive, onStartDrawing, onCompleteDrawing, app]);
+      }),
+    [onActive, onInactive, onStartDrawing, onCompleteDrawing]
+  );
+
+  const onClick = useCallback(() => {
+    app.setTool(tool);
+  }, [tool, app]);
 
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="MoveOne"></Icon>}
+        {typeof children === 'function' ? children({ active, tool }) : children ?? <Icon type="MoveOne"></Icon>}
       </div>
     </>
   );

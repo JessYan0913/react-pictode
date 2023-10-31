@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { EllipseTool as PictodeEllipse } from '@pictode/tools';
+import { useCallback, useMemo } from 'react';
+import { EllipseTool as PictodeEllipseTool } from '@pictode/tools';
 
 import { useActive } from '../hooks/useActive';
 import { usePictode } from '../hooks/usePictode';
@@ -19,12 +19,11 @@ export const EllipseTool = (props: EllipseToolProps) => {
     ...restProps
   } = props;
 
-  const { app } = usePictode(PictodeEllipse.name);
-  const { active } = useActive(PictodeEllipse.name);
-
-  const onClick = useCallback(() => {
-    app.setTool(
-      new PictodeEllipse({
+  const { app } = usePictode(PictodeEllipseTool.name);
+  const { active } = useActive(PictodeEllipseTool.name);
+  const tool = useMemo(
+    () =>
+      new PictodeEllipseTool({
         config,
         hooks: {
           onActive,
@@ -32,14 +31,18 @@ export const EllipseTool = (props: EllipseToolProps) => {
           onStartDrawing,
           onCompleteDrawing,
         },
-      })
-    );
-  }, [config, onActive, onInactive, onStartDrawing, onCompleteDrawing, app]);
+      }),
+    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
+  );
+
+  const onClick = useCallback(() => {
+    app.setTool(tool);
+  }, [tool, app]);
 
   return (
     <>
       <div className={className} onClick={onClick} {...restProps}>
-        {typeof children === 'function' ? children({ active }) : children ?? <Icon type="OvalOne"></Icon>}
+        {typeof children === 'function' ? children({ active, tool }) : children ?? <Icon type="OvalOne"></Icon>}
       </div>
     </>
   );

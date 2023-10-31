@@ -20,6 +20,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   const { className } = props;
   const [app, setApp] = useState<App>();
   const pictodeRef = useRef<PictodeContextType>(null);
+  const [rectConfig] = useState({ stroke: '#ff00ff', strokeWidth: 2 });
   const selectorPlugin = new SelectorPlugin();
   const historyPlugin = new HistoryPlugin();
 
@@ -81,34 +82,60 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 </>
               )}
             </SelectTool>
-            <RectTool onActive={onActiveTool('rectTool')}>
-              {({ active }) => (
+            <RectTool config={rectConfig} onActive={onActiveTool('rectTool')}>
+              {({ active, tool }) => (
                 <>
                   <Icon
                     className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="RectangleOne"
                   ></Icon>
                   {active && (
-                    <div
-                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
-                      onClick={() => console.log('点击')}
-                    ></div>
+                    <div className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}>
+                      <button
+                        onClick={() => {
+                          tool.config = {
+                            stroke: '#ff0000',
+                            strokeWidth: 8,
+                          };
+                        }}
+                      >
+                        粗
+                      </button>
+                      <button
+                        onClick={() => {
+                          tool.config = {
+                            stroke: '#ff0000',
+                            strokeWidth: 2,
+                          };
+                        }}
+                      >
+                        细
+                      </button>
+                    </div>
                   )}
                 </>
               )}
             </RectTool>
             <EllipseTool onActive={onActiveTool('ellipseTool')}>
-              {({ active }) => (
+              {({ active, tool }) => (
                 <>
                   <Icon
                     className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="OvalOne"
                   ></Icon>
                   {active && (
-                    <div
-                      className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}
-                      onClick={() => console.log('点击')}
-                    ></div>
+                    <div className={'pe-absolute pe-w-28 pe-h-14 pe-bg-red-300 pe-z-10 pe-mt-3'}>
+                      <button
+                        onClick={() => {
+                          tool.config = {
+                            stroke: '#ff0000',
+                            strokeWidth: 8,
+                          };
+                        }}
+                      >
+                        加粗
+                      </button>
+                    </div>
                   )}
                 </>
               )}
@@ -145,7 +172,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 </>
               )}
             </TextTool>
-            <ImageTool onActive={onActiveTool('imageTool')}>
+            <ImageTool config={{ image: new Image() }} onActive={onActiveTool('imageTool')}>
               {({ active }) => (
                 <>
                   <Icon
