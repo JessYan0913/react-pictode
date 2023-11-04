@@ -9,6 +9,7 @@ import { Icon } from './Icon';
 export interface TextToolProps extends ToolProps {
   config?: TextToolConfig;
 }
+
 export const TextTool = (props: TextToolProps) => {
   const {
     config = {

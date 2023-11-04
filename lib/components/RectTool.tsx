@@ -9,6 +9,7 @@ import { Icon } from './Icon';
 export interface RectToolProps extends ToolProps {
   config?: RectToolConfig;
 }
+
 export const RectTool = (props: RectToolProps) => {
   const {
     config = {

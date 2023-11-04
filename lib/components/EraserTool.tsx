@@ -5,6 +5,7 @@ import { usePictode } from '../hooks/usePictode';
 import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
+
 export interface EraserToolProps extends ToolProps {}
 
 export const EraserTool = (props: EraserToolProps) => {

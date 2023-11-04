@@ -7,6 +7,7 @@ import { ToolProps } from '../types';
 import { Icon } from './Icon';
 
 export interface SelectToolProps extends ToolProps {}
+
 export const SelectTool = (props: SelectToolProps) => {
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;
   const { app, tool: activeTool } = usePictode(PictodeSelectTool.name);
