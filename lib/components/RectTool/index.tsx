@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from 'react';
 import { RectTool as PictodeRectTool } from '@pictode/tools';
 
-import { usePictode } from '../hooks/usePictode';
+import { usePictode } from '../../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { RectToolProps } from './types';
@@ -38,12 +38,8 @@ export const RectTool = (props: RectToolProps) => {
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   return (
-    <>
-      <Fragment>
-        {typeof children === 'function'
-          ? children({ app, active, tool })
-          : children ?? <Icon type="RectangleOne"></Icon>}
-      </Fragment>
-    </>
+    <Fragment>
+      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="RectangleOne"></Icon>}
+    </Fragment>
   );
 };

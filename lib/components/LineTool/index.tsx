@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from 'react';
 import { LineTool as PictodeLineTool } from '@pictode/tools';
 
-import { usePictode } from '../hooks/usePictode';
+import { usePictode } from '../../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { LineToolProps } from './types';
@@ -36,10 +36,8 @@ export const LineTool = (props: LineToolProps) => {
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   return (
-    <>
-      <Fragment>
-        {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Clue"></Icon>}
-      </Fragment>
-    </>
+    <Fragment>
+      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Clue"></Icon>}
+    </Fragment>
   );
 };

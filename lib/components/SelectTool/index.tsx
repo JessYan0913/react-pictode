@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from 'react';
 import { SelectTool as PictodeSelectTool } from '@pictode/tools';
 
-import { usePictode } from '../hooks/usePictode';
+import { usePictode } from '../../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { SelectToolProps } from './types';
@@ -24,10 +24,8 @@ export const SelectTool = (props: SelectToolProps) => {
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   return (
-    <>
-      <Fragment>
-        {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="MoveOne"></Icon>}
-      </Fragment>
-    </>
+    <Fragment>
+      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="MoveOne"></Icon>}
+    </Fragment>
   );
 };

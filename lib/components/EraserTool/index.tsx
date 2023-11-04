@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from 'react';
 import { EraserTool as PictodeEraserTool } from '@pictode/tools';
 
-import { usePictode } from '../hooks/usePictode';
+import { usePictode } from '../../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { EraserToolProps } from './types';
@@ -24,10 +24,8 @@ export const EraserTool = (props: EraserToolProps) => {
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   return (
-    <>
-      <Fragment>
-        {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Erase"></Icon>}
-      </Fragment>
-    </>
+    <Fragment>
+      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Erase"></Icon>}
+    </Fragment>
   );
 };

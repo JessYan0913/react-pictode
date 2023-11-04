@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from 'react';
 import { TextTool as PictodeText } from '@pictode/tools';
 
-import { usePictode } from '../hooks/usePictode';
+import { usePictode } from '../../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { TextToolProps } from './types';
@@ -38,10 +38,8 @@ export const TextTool = (props: TextToolProps) => {
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   return (
-    <>
-      <Fragment>
-        {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Text"></Icon>}
-      </Fragment>
-    </>
+    <Fragment>
+      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Text"></Icon>}
+    </Fragment>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { usePictode } from '../hooks/usePictode';
+import { usePictode } from '../../hooks/usePictode';
 
 import { StageProps } from './types';
 
@@ -17,9 +17,5 @@ export const Stage = (props: StageProps) => {
     }
   }, [app]);
 
-  return (
-    <>
-      <div className={`${className ?? ''}`} ref={stageRef} {...restProps}></div>
-    </>
-  );
+  return <div className={`${className ?? ''}`} ref={stageRef} {...restProps}></div>;
 };

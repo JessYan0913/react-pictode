@@ -24,105 +24,91 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   useImperativeHandle(ref, () => pictodeRef);
 
   return (
-    <>
-      <div className={`${className} pe-w-full pe-h-full`}>
-        <Pictode
-          className={'pe-w-full pe-h-full pe-flex pe-flex-col pe-gap-2'}
-          ref={pictodeRef}
-          plugins={[selectorPlugin, historyPlugin]}
-        >
-          {({ app }) => (
-            <>
-              <div className={'pe-w-full pe-flex pe-flex-row pe-flex-wrap pe-justify-around pe-bg-zinc-100 pe-p-2'}>
-                <Icon
-                  className={'pe-rounded hover:pe-bg-slate-200'}
-                  type="ZoomOut"
-                  onClick={() => app.scaleTo(app.scale() - app.config.mousewheel.factor)}
-                ></Icon>
-                <Icon
-                  className={'pe-rounded hover:pe-bg-slate-200'}
-                  type="ZoomIn"
-                  onClick={() => app.scaleTo(app.scale() + app.config.mousewheel.factor)}
-                ></Icon>
-                <SelectTool
-                  onActive={() => {
-                    app.enablePlugin(selectorPlugin.name);
-                  }}
-                  onInactive={() => {
-                    app.disablePlugin(selectorPlugin.name);
-                  }}
-                >
-                  {({ app, active, tool }) => (
-                    <>
-                      <Icon
-                        className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                        type="MoveOne"
-                        onClick={() => app.setTool(tool)}
-                      ></Icon>
-                    </>
-                  )}
-                </SelectTool>
-                <RectTool>
-                  {({ app, active, tool }) => (
-                    <>
-                      <Icon
-                        className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                        type="RectangleOne"
-                        onClick={() => app.setTool(tool)}
-                      ></Icon>
-                    </>
-                  )}
-                </RectTool>
-                <EllipseTool>
-                  {({ app, active, tool }) => (
-                    <>
-                      <Icon
-                        className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                        type="OvalOne"
-                        onClick={() => app.setTool(tool)}
-                      ></Icon>
-                    </>
-                  )}
-                </EllipseTool>
-                <LineTool>
-                  {({ app, active, tool }) => (
-                    <>
-                      <Icon
-                        className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                        type="Clue"
-                        onClick={() => app.setTool(tool)}
-                      ></Icon>
-                    </>
-                  )}
-                </LineTool>
-                <TextTool>
-                  {({ app, active, tool }) => (
-                    <>
-                      <Icon
-                        className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                        type="Text"
-                        onClick={() => app.setTool(tool)}
-                      ></Icon>
-                    </>
-                  )}
-                </TextTool>
-                <ImageTool config={{ image: new Image() }}>
-                  {({ active }) => (
-                    <>
-                      <Icon
-                        className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                        type="ImageFiles"
-                      ></Icon>
-                    </>
-                  )}
-                </ImageTool>
-                <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="Return" onClick={() => app.undo()}></Icon>
-              </div>
-              <Stage className={'pe-w-full pe-h-full'}></Stage>
-            </>
-          )}
-        </Pictode>
-      </div>
-    </>
+    <div className={`${className} pe-w-full pe-h-full`}>
+      <Pictode
+        className={'pe-w-full pe-h-full pe-flex pe-flex-col pe-gap-2'}
+        ref={pictodeRef}
+        plugins={[selectorPlugin, historyPlugin]}
+      >
+        {({ app }) => (
+          <>
+            <div className={'pe-w-full pe-flex pe-flex-row pe-flex-wrap pe-justify-around pe-bg-zinc-100 pe-p-2'}>
+              <Icon
+                className={'pe-rounded hover:pe-bg-slate-200'}
+                type="ZoomOut"
+                onClick={() => app.scaleTo(app.scale() - app.config.mousewheel.factor)}
+              ></Icon>
+              <Icon
+                className={'pe-rounded hover:pe-bg-slate-200'}
+                type="ZoomIn"
+                onClick={() => app.scaleTo(app.scale() + app.config.mousewheel.factor)}
+              ></Icon>
+              <SelectTool
+                onActive={() => {
+                  app.enablePlugin(selectorPlugin.name);
+                }}
+                onInactive={() => {
+                  app.disablePlugin(selectorPlugin.name);
+                }}
+              >
+                {({ app, active, tool }) => (
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="MoveOne"
+                    onClick={() => app.setTool(tool)}
+                  ></Icon>
+                )}
+              </SelectTool>
+              <RectTool>
+                {({ app, active, tool }) => (
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="RectangleOne"
+                    onClick={() => app.setTool(tool)}
+                  ></Icon>
+                )}
+              </RectTool>
+              <EllipseTool>
+                {({ app, active, tool }) => (
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="OvalOne"
+                    onClick={() => app.setTool(tool)}
+                  ></Icon>
+                )}
+              </EllipseTool>
+              <LineTool>
+                {({ app, active, tool }) => (
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="Clue"
+                    onClick={() => app.setTool(tool)}
+                  ></Icon>
+                )}
+              </LineTool>
+              <TextTool>
+                {({ app, active, tool }) => (
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="Text"
+                    onClick={() => app.setTool(tool)}
+                  ></Icon>
+                )}
+              </TextTool>
+              <ImageTool config={{ image: new Image() }}>
+                {({ active }) => (
+                  <Icon
+                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    type="ImageFiles"
+                  ></Icon>
+                )}
+              </ImageTool>
+              <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="Return" onClick={() => app.undo()}></Icon>
+            </div>
+            <Stage className={'pe-w-full pe-h-full'}></Stage>
+          </>
+        )}
+      </Pictode>
+    </div>
   );
 });

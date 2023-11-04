@@ -8,5 +8,6 @@ export { RectTool } from './components/RectTool';
 export { SelectTool } from './components/SelectTool';
 export { TextTool } from './components/TextTool';
 export { Editor } from './components/Editor';
+export * from './hooks/usePictode';
 
 export type { PictodeContextType } from './components/Pictode/types';

@@ -7,7 +7,7 @@ export const PictodeContext = createContext<PictodeContextType | null>(null);
 
 export const Pictode = forwardRef((props: PictodeProps, ref: React.ForwardedRef<PictodeContextType>) => {
   const { plugins = [], className, children } = props;
-  const [app] = useState<App>(new App());
+  const app = useMemo(() => new App(), []);
   const [tool, setTool] = useState<Tool | null>(null);
 
   const contextValue = useMemo(() => ({ app, plugins, tool }), [app, plugins, tool]);

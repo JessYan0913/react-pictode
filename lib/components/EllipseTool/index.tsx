@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from 'react';
 import { EllipseTool as PictodeEllipseTool } from '@pictode/tools';
 
-import { usePictode } from '../hooks/usePictode';
+import { usePictode } from '../../hooks/usePictode';
 import { Icon } from '../Icon';
 
 import { EllipseToolProps } from './types';
@@ -33,10 +33,8 @@ export const EllipseTool = (props: EllipseToolProps) => {
   const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
 
   return (
-    <>
-      <Fragment>
-        {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="OvalOne"></Icon>}
-      </Fragment>
-    </>
+    <Fragment>
+      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="OvalOne"></Icon>}
+    </Fragment>
   );
 };
