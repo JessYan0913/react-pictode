@@ -25,7 +25,9 @@
     "@pictode/plugin-alignment": "^1.0.0",
     "@pictode/plugin-history": "^1.0.0",
     "@pictode/plugin-selector": "^1.0.0",
-    "@pictode/tools": "^1.0.0"
+    "@pictode/tools": "^1.0.0",
+    "@popperjs/core": "^2.11.8",
+    "react-popper": "^2.3.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",

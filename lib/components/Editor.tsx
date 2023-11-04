@@ -1,4 +1,5 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { usePopper } from 'react-popper';
 import { HistoryPlugin } from '@pictode/plugin-history';
 import { SelectorPlugin } from '@pictode/plugin-selector';
 
@@ -19,8 +20,24 @@ export interface EditorProps extends React.HTMLAttributes<HTMLDivElement> {}
 export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<React.RefObject<PictodeContextType>>) => {
   const { className } = props;
   const pictodeRef = useRef<PictodeContextType>(null);
-  const selectorPlugin = new SelectorPlugin();
+  const selectorPlugin = new SelectorPlugin({
+    enabled: false,
+  });
   const historyPlugin = new HistoryPlugin();
+  const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: 'bottom',
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 8],
+        },
+      },
+    ],
+  });
+  const [show, setShow] = useState(false);
 
   useImperativeHandle(ref, () => pictodeRef);
 
@@ -62,11 +79,25 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
               </SelectTool>
               <RectTool>
                 {({ app, active, tool }) => (
-                  <Icon
-                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    type="RectangleOne"
-                    onClick={() => app.setTool(tool)}
-                  ></Icon>
+                  <>
+                    <div
+                      ref={setReferenceElement}
+                      onClick={() => {
+                        app.setTool(tool);
+                        setShow(!show);
+                      }}
+                    >
+                      <Icon
+                        className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                        type="RectangleOne"
+                      ></Icon>
+                    </div>
+                    {show && (
+                      <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+                        <div className={'pe-bg-slate-300'}>面板</div>
+                      </div>
+                    )}
+                  </>
                 )}
               </RectTool>
               <EllipseTool>
