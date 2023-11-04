@@ -1,10 +1,14 @@
 import { Fragment, useMemo } from 'react';
-import { EllipseTool as PictodeEllipseTool } from '@pictode/tools';
+import { EllipseTool as PictodeEllipseTool, EllipseToolConfig } from '@pictode/tools';
 
-import { usePictode } from '../../hooks/usePictode';
-import { Icon } from '../Icon';
+import { usePictode } from '../hooks/usePictode';
+import { ToolProps } from '../types';
 
-import { EllipseToolProps } from './types';
+import { Icon } from './Icon';
+
+export interface EllipseToolProps extends ToolProps {
+  config?: EllipseToolConfig;
+}
 
 export const EllipseTool = (props: EllipseToolProps) => {
   const {

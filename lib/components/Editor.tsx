@@ -2,18 +2,19 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { HistoryPlugin } from '@pictode/plugin-history';
 import { SelectorPlugin } from '@pictode/plugin-selector';
 
-import { EllipseTool } from '../EllipseTool';
-import { Icon } from '../Icon';
-import { ImageTool } from '../ImageTool';
-import { LineTool } from '../LineTool';
-import { Pictode } from '../Pictode';
-import type { PictodeContextType } from '../Pictode/types';
-import { RectTool } from '../RectTool';
-import { SelectTool } from '../SelectTool';
-import { Stage } from '../Stage';
-import { TextTool } from '../TextTool';
+import type { PictodeContextType } from '../types';
 
-import { EditorProps } from './types';
+import { EllipseTool } from './EllipseTool';
+import { Icon } from './Icon';
+import { ImageTool } from './ImageTool';
+import { LineTool } from './LineTool';
+import { Pictode } from './Pictode';
+import { RectTool } from './RectTool';
+import { SelectTool } from './SelectTool';
+import { Stage } from './Stage';
+import { TextTool } from './TextTool';
+
+export interface EditorProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<React.RefObject<PictodeContextType>>) => {
   const { className } = props;

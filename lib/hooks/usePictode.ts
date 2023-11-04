@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { PictodeContext } from '../components/Pictode';
-import { PictodeContextType } from '../components/Pictode/types';
+import { PictodeContextType } from '../types';
 
 export const usePictode = (componentName: string): PictodeContextType => {
   const pictode = useContext(PictodeContext);

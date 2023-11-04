@@ -1,11 +1,14 @@
 import { Fragment, useMemo } from 'react';
-import { TextTool as PictodeText } from '@pictode/tools';
+import { TextTool as PictodeText, TextToolConfig } from '@pictode/tools';
 
-import { usePictode } from '../../hooks/usePictode';
-import { Icon } from '../Icon';
+import { usePictode } from '../hooks/usePictode';
+import { ToolProps } from '../types';
 
-import { TextToolProps } from './types';
+import { Icon } from './Icon';
 
+export interface TextToolProps extends ToolProps {
+  config?: TextToolConfig;
+}
 export const TextTool = (props: TextToolProps) => {
   const {
     config = {

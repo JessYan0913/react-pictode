@@ -1,10 +1,14 @@
 import { Fragment, useMemo } from 'react';
-import { LineTool as PictodeLineTool } from '@pictode/tools';
+import { LineTool as PictodeLineTool, LineToolConfig } from '@pictode/tools';
 
-import { usePictode } from '../../hooks/usePictode';
-import { Icon } from '../Icon';
+import { usePictode } from '../hooks/usePictode';
+import { ToolProps } from '../types';
 
-import { LineToolProps } from './types';
+import { Icon } from './Icon';
+
+export interface LineToolProps extends ToolProps {
+  config?: LineToolConfig;
+}
 
 export const LineTool = (props: LineToolProps) => {
   const {

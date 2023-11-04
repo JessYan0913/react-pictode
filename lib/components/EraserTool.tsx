@@ -1,10 +1,11 @@
 import { Fragment, useMemo } from 'react';
 import { EraserTool as PictodeEraserTool } from '@pictode/tools';
 
-import { usePictode } from '../../hooks/usePictode';
-import { Icon } from '../Icon';
+import { usePictode } from '../hooks/usePictode';
+import { ToolProps } from '../types';
 
-import { EraserToolProps } from './types';
+import { Icon } from './Icon';
+export interface EraserToolProps extends ToolProps {}
 
 export const EraserTool = (props: EraserToolProps) => {
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;

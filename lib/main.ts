@@ -1,13 +1,12 @@
-export { Pictode } from './components/Pictode';
-export { Stage } from './components/Stage';
-export { EllipseTool } from './components/EllipseTool';
-export { EraserTool } from './components/EraserTool';
-export { ImageTool } from './components/ImageTool';
-export { LineTool } from './components/LineTool';
-export { RectTool } from './components/RectTool';
-export { SelectTool } from './components/SelectTool';
-export { TextTool } from './components/TextTool';
-export { Editor } from './components/Editor';
+export * from './components/Pictode';
+export * from './components/Stage';
+export * from './components/EllipseTool';
+export * from './components/EraserTool';
+export * from './components/ImageTool';
+export * from './components/LineTool';
+export * from './components/RectTool';
+export * from './components/SelectTool';
+export * from './components/TextTool';
+export * from './components/Editor';
 export * from './hooks/usePictode';
-
-export type { PictodeContextType } from './components/Pictode/types';
+export * from './types';

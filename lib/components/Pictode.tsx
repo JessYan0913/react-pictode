@@ -1,7 +1,12 @@
 import { createContext, forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
-import { App, EventArgs, Tool } from '@pictode/core';
+import { App, EventArgs, Plugin, Tool } from '@pictode/core';
 
-import { PictodeContextType, PictodeProps } from './types';
+import { ChildrenComponent, PictodeContextType } from '../types';
+
+export interface PictodeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
+  plugins?: Plugin[];
+  children?: ChildrenComponent<PictodeContextType>;
+}
 
 export const PictodeContext = createContext<PictodeContextType | null>(null);
 

@@ -1,6 +1,10 @@
-import IconPark, { ALL_ICON_KEYS } from '@icon-park/react/es/all';
+import IconPark, { ALL_ICON_KEYS, IconType, Theme } from '@icon-park/react/es/all';
 
-import { IconProps } from './types';
+export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
+  type: IconType;
+  size?: number | string;
+  theme?: Theme;
+}
 
 export const Icon = (props: IconProps) => {
   const { type, size, theme, className, ...restProps } = props;

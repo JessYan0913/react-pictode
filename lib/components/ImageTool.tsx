@@ -1,10 +1,14 @@
 import { Fragment, useMemo } from 'react';
-import { ImageTool as PictodeImageTool } from '@pictode/tools';
+import { ImageConfig, ImageTool as PictodeImageTool } from '@pictode/tools';
 
-import { usePictode } from '../../hooks/usePictode';
-import { Icon } from '../Icon';
+import { usePictode } from '../hooks/usePictode';
+import { ToolProps } from '../types';
 
-import { ImageToolProps } from './types';
+import { Icon } from './Icon';
+
+export interface ImageToolProps extends ToolProps {
+  config: ImageConfig;
+}
 
 export const ImageTool = (props: ImageToolProps) => {
   const { config, onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;

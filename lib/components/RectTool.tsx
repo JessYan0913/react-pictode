@@ -1,11 +1,14 @@
 import { Fragment, useMemo } from 'react';
-import { RectTool as PictodeRectTool } from '@pictode/tools';
+import { RectTool as PictodeRectTool, RectToolConfig } from '@pictode/tools';
 
-import { usePictode } from '../../hooks/usePictode';
-import { Icon } from '../Icon';
+import { usePictode } from '../hooks/usePictode';
+import { ToolProps } from '../types';
 
-import { RectToolProps } from './types';
+import { Icon } from './Icon';
 
+export interface RectToolProps extends ToolProps {
+  config?: RectToolConfig;
+}
 export const RectTool = (props: RectToolProps) => {
   const {
     config = {

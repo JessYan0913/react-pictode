@@ -1,11 +1,12 @@
 import { Fragment, useMemo } from 'react';
 import { SelectTool as PictodeSelectTool } from '@pictode/tools';
 
-import { usePictode } from '../../hooks/usePictode';
-import { Icon } from '../Icon';
+import { usePictode } from '../hooks/usePictode';
+import { ToolProps } from '../types';
 
-import { SelectToolProps } from './types';
+import { Icon } from './Icon';
 
+export interface SelectToolProps extends ToolProps {}
 export const SelectTool = (props: SelectToolProps) => {
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;
   const { app, tool: activeTool } = usePictode(PictodeSelectTool.name);
