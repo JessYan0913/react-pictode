@@ -37,7 +37,6 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
       },
     ],
   });
-  const [show, setShow] = useState(false);
 
   useImperativeHandle(ref, () => pictodeRef);
 
@@ -80,19 +79,13 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
               <RectTool>
                 {({ app, active, tool }) => (
                   <>
-                    <div
-                      ref={setReferenceElement}
-                      onClick={() => {
-                        app.setTool(tool);
-                        setShow(!show);
-                      }}
-                    >
+                    <div ref={setReferenceElement} onClick={() => app.setTool(tool)}>
                       <Icon
                         className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                         type="RectangleOne"
                       ></Icon>
                     </div>
-                    {show && (
+                    {active && (
                       <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
                         <div className={'pe-bg-slate-300'}>面板</div>
                       </div>
