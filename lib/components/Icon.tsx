@@ -1,4 +1,3 @@
-import { forwardRef } from 'react';
 import IconPark, { ALL_ICON_KEYS, IconType, Theme } from '@icon-park/react/es/all';
 
 export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -7,7 +6,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
   theme?: Theme;
 }
 
-export const Icon = forwardRef((props: IconProps) => {
+export const Icon = (props: IconProps) => {
   const { type, size, theme, className, ...restProps } = props;
   if (ALL_ICON_KEYS.indexOf(type) < 0) {
     return <span>Not Exists</span>;
@@ -22,4 +21,4 @@ export const Icon = forwardRef((props: IconProps) => {
       {...restProps}
     />
   );
-});
+};
