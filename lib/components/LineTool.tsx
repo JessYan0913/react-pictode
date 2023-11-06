@@ -2,12 +2,15 @@ import { Fragment, useMemo } from 'react';
 import { LineTool as PictodeLineTool, LineToolConfig } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
 
+export type LineTool = LineToolConfig;
+
 export interface LineToolProps extends ToolProps {
-  config?: LineToolConfig;
+  config?: LineTool;
 }
 
 export const LineTool = (props: LineToolProps) => {
@@ -23,7 +26,7 @@ export const LineTool = (props: LineToolProps) => {
     onCompleteDrawing,
     children,
   } = props;
-  const { app, tool: activeTool } = usePictode(PictodeLineTool.name);
+  const { app } = usePictode(PictodeLineTool.name);
   const tool = useMemo(
     () =>
       new PictodeLineTool({
@@ -37,11 +40,11 @@ export const LineTool = (props: LineToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
+  const { active, isActive } = useToolState<LineTool>(app, tool, config);
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Clue"></Icon>}
+      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="Clue"></Icon>}
     </Fragment>
   );
 };

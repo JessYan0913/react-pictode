@@ -2,12 +2,15 @@ import { Fragment, useMemo } from 'react';
 import { TextTool as PictodeText, TextToolConfig } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
 
+export type TextConfig = TextToolConfig;
+
 export interface TextToolProps extends ToolProps {
-  config?: TextToolConfig;
+  config?: TextConfig;
 }
 
 export const TextTool = (props: TextToolProps) => {
@@ -25,7 +28,7 @@ export const TextTool = (props: TextToolProps) => {
     onCompleteDrawing,
     children,
   } = props;
-  const { app, tool: activeTool } = usePictode(PictodeText.name);
+  const { app } = usePictode(PictodeText.name);
   const tool = useMemo(
     () =>
       new PictodeText({
@@ -39,11 +42,11 @@ export const TextTool = (props: TextToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
+  const { active, isActive } = useToolState<TextConfig>(app, tool, config);
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Text"></Icon>}
+      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="Text"></Icon>}
     </Fragment>
   );
 };

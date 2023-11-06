@@ -27,6 +27,7 @@
     "@pictode/plugin-selector": "^1.0.0",
     "@pictode/tools": "^1.0.0",
     "@popperjs/core": "^2.11.8",
+    "react-color": "^2.19.3",
     "react-popper": "^2.3.0"
   },
   "peerDependencies": {
@@ -38,6 +39,7 @@
     "@commitlint/config-conventional": "^18.0.0",
     "@types/node": "^20.4.8",
     "@types/react": "^18.2.15",
+    "@types/react-color": "^3.0.9",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",

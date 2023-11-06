@@ -2,12 +2,15 @@ import { Fragment, useMemo } from 'react';
 import { RectTool as PictodeRectTool, RectToolConfig } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
 
+export type RectConfig = RectToolConfig;
+
 export interface RectToolProps extends ToolProps {
-  config?: RectToolConfig;
+  config?: RectConfig;
 }
 
 export const RectTool = (props: RectToolProps) => {
@@ -25,7 +28,7 @@ export const RectTool = (props: RectToolProps) => {
     onCompleteDrawing,
     children,
   } = props;
-  const { app, tool: activeTool } = usePictode(PictodeRectTool.name);
+  const { app } = usePictode(PictodeRectTool.name);
   const tool = useMemo(
     () =>
       new PictodeRectTool({
@@ -39,11 +42,13 @@ export const RectTool = (props: RectToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
+  const { active, isActive } = useToolState<RectConfig>(app, tool, config);
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="RectangleOne"></Icon>}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : children ?? <Icon type="RectangleOne"></Icon>}
     </Fragment>
   );
 };
