@@ -5,9 +5,10 @@ import { SelectorPlugin } from '@pictode/plugin-selector';
 
 import type { PictodeContextType } from '../types';
 
+import { ColorPicker } from './ColorPicker';
 import { EllipseTool } from './EllipseTool';
 import { Icon } from './Icon';
-import { ImageTool } from './ImageTool';
+import { ImageConfig, ImageTool } from './ImageTool';
 import { LineTool } from './LineTool';
 import { Pictode } from './Pictode';
 import { RectConfig, RectTool } from './RectTool';
@@ -41,6 +42,11 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   const [rectConfig, setRectConfig] = useState<RectConfig>({
     stroke: '#000000',
     strokeWidth: 2,
+  });
+
+  const [imageConfig] = useState<ImageConfig>({
+    stroke: '#00000000',
+    image: new Image(),
   });
 
   useImperativeHandle(ref, () => pictodeRef);
@@ -94,26 +100,14 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                       <div
                         ref={setPopperElement}
                         style={styles.popper}
-                        className={'pe-bg-slate-300 pe-z-50'}
+                        className={'pe-bg-slate-300 pe-p-2 pe-z-50'}
                         {...attributes.popper}
                       >
-                        <div className={'pe-flex'}>
-                          <div
-                            className={'pe-w-6 pe-h-6 pe-cursor-pointer'}
-                            style={{ backgroundColor: '#00ffff' }}
-                            onClick={() => setRectConfig({ ...rectConfig, stroke: '#00ffff' })}
-                          ></div>
-                          <div
-                            className={'pe-w-6 pe-h-6 pe-cursor-pointer'}
-                            style={{ backgroundColor: '#ff0000' }}
-                            onClick={() => setRectConfig({ ...rectConfig, stroke: '#ff0000' })}
-                          ></div>
-                          <div
-                            className={'pe-w-6 pe-h-6 pe-cursor-pointer'}
-                            style={{ backgroundColor: '#0000ff' }}
-                            onClick={() => setRectConfig({ ...rectConfig, stroke: '#0000ff' })}
-                          ></div>
-                        </div>
+                        <ColorPicker
+                          className={'pe-w-6 pe-h-6'}
+                          color={rectConfig.stroke as string}
+                          onChange={(color) => setRectConfig({ ...rectConfig, stroke: color })}
+                        ></ColorPicker>
                       </div>
                     )}
                   </>
@@ -146,7 +140,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                   ></Icon>
                 )}
               </TextTool>
-              <ImageTool config={{ image: new Image() }}>
+              <ImageTool config={imageConfig}>
                 {({ isActive }) => (
                   <Icon
                     className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
@@ -163,3 +157,5 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
     </div>
   );
 });
+
+export default Editor;
