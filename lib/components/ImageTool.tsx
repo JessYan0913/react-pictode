@@ -1,11 +1,13 @@
 import { Fragment, useMemo } from 'react';
-import { ImageConfig, ImageTool as PictodeImageTool } from '@pictode/tools';
+import { ImageConfig as ImageToolConfig, ImageTool as PictodeImageTool } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
+
+export type ImageConfig = ImageToolConfig;
 
 export interface ImageToolProps extends ToolProps {
   config: ImageConfig;

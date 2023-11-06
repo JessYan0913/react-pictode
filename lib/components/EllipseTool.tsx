@@ -7,8 +7,10 @@ import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
 
+export type EllipseConfig = EllipseToolConfig;
+
 export interface EllipseToolProps extends ToolProps {
-  config?: EllipseToolConfig;
+  config?: EllipseConfig;
 }
 
 export const EllipseTool = (props: EllipseToolProps) => {
@@ -35,7 +37,7 @@ export const EllipseTool = (props: EllipseToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const { active, isActive } = useToolState<EllipseToolConfig>(app, tool, config);
+  const { active, isActive } = useToolState<EllipseConfig>(app, tool, config);
 
   return (
     <Fragment>

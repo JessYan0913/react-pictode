@@ -7,8 +7,10 @@ import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
 
+export type LineTool = LineToolConfig;
+
 export interface LineToolProps extends ToolProps {
-  config?: LineToolConfig;
+  config?: LineTool;
 }
 
 export const LineTool = (props: LineToolProps) => {
@@ -38,7 +40,7 @@ export const LineTool = (props: LineToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const { active, isActive } = useToolState<LineToolConfig>(app, tool, config);
+  const { active, isActive } = useToolState<LineTool>(app, tool, config);
 
   return (
     <Fragment>

@@ -7,8 +7,10 @@ import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
 
+export type TextConfig = TextToolConfig;
+
 export interface TextToolProps extends ToolProps {
-  config?: TextToolConfig;
+  config?: TextConfig;
 }
 
 export const TextTool = (props: TextToolProps) => {
@@ -40,7 +42,7 @@ export const TextTool = (props: TextToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const { active, isActive } = useToolState<TextToolConfig>(app, tool, config);
+  const { active, isActive } = useToolState<TextConfig>(app, tool, config);
 
   return (
     <Fragment>

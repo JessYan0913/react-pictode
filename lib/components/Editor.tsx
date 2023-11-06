@@ -10,7 +10,7 @@ import { Icon } from './Icon';
 import { ImageTool } from './ImageTool';
 import { LineTool } from './LineTool';
 import { Pictode } from './Pictode';
-import { RectTool } from './RectTool';
+import { RectConfig, RectTool } from './RectTool';
 import { SelectTool } from './SelectTool';
 import { Stage } from './Stage';
 import { TextTool } from './TextTool';
@@ -38,8 +38,9 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
     ],
   });
 
-  const [rectConfig, setRectConfig] = useState({
+  const [rectConfig, setRectConfig] = useState<RectConfig>({
     stroke: '#000000',
+    strokeWidth: 2,
   });
 
   useImperativeHandle(ref, () => pictodeRef);
@@ -96,10 +97,22 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                         className={'pe-bg-slate-300 pe-z-50'}
                         {...attributes.popper}
                       >
-                        <div>
-                          <button onClick={() => setRectConfig({ stroke: '#00ffff' })}>青色</button>
-                          <button onClick={() => setRectConfig({ stroke: '#ff0000' })}>红色</button>
-                          <button onClick={() => setRectConfig({ stroke: '#0000ff' })}>蓝色</button>
+                        <div className={'pe-flex'}>
+                          <div
+                            className={'pe-w-6 pe-h-6 pe-cursor-pointer'}
+                            style={{ backgroundColor: '#00ffff' }}
+                            onClick={() => setRectConfig({ ...rectConfig, stroke: '#00ffff' })}
+                          ></div>
+                          <div
+                            className={'pe-w-6 pe-h-6 pe-cursor-pointer'}
+                            style={{ backgroundColor: '#ff0000' }}
+                            onClick={() => setRectConfig({ ...rectConfig, stroke: '#ff0000' })}
+                          ></div>
+                          <div
+                            className={'pe-w-6 pe-h-6 pe-cursor-pointer'}
+                            style={{ backgroundColor: '#0000ff' }}
+                            onClick={() => setRectConfig({ ...rectConfig, stroke: '#0000ff' })}
+                          ></div>
                         </div>
                       </div>
                     )}

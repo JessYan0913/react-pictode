@@ -7,8 +7,10 @@ import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
 
+export type RectConfig = RectToolConfig;
+
 export interface RectToolProps extends ToolProps {
-  config?: RectToolConfig;
+  config?: RectConfig;
 }
 
 export const RectTool = (props: RectToolProps) => {
@@ -40,7 +42,7 @@ export const RectTool = (props: RectToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const { active, isActive } = useToolState<RectToolConfig>(app, tool, config);
+  const { active, isActive } = useToolState<RectConfig>(app, tool, config);
 
   return (
     <Fragment>
