@@ -1,7 +1,8 @@
-import { Fragment, useCallback, useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { SelectTool as PictodeSelectTool } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
+import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
 
 import { Icon } from './Icon';
@@ -10,7 +11,7 @@ export interface SelectToolProps extends ToolProps {}
 
 export const SelectTool = (props: SelectToolProps) => {
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;
-  const { app, tool: activeTool } = usePictode(PictodeSelectTool.name);
+  const { app } = usePictode(PictodeSelectTool.name);
   const tool = useMemo(
     () =>
       new PictodeSelectTool({
@@ -23,10 +24,7 @@ export const SelectTool = (props: SelectToolProps) => {
       }),
     [onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const isActive = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
-  const active = useCallback(() => {
-    app.setTool(tool);
-  }, [app, tool]);
+  const { active, isActive } = useToolState(app, tool);
 
   return (
     <Fragment>

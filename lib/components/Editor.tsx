@@ -38,6 +38,10 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
     ],
   });
 
+  const [rectConfig, setRectConfig] = useState({
+    stroke: '#000000',
+  });
+
   useImperativeHandle(ref, () => pictodeRef);
 
   return (
@@ -76,7 +80,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                   ></Icon>
                 )}
               </SelectTool>
-              <RectTool>
+              <RectTool config={rectConfig}>
                 {({ isActive, active }) => (
                   <>
                     <div ref={setReferenceElement} onClick={active}>
@@ -86,8 +90,17 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                       ></Icon>
                     </div>
                     {isActive && (
-                      <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
-                        <div className={'pe-bg-slate-300'}>面板</div>
+                      <div
+                        ref={setPopperElement}
+                        style={styles.popper}
+                        className={'pe-bg-slate-300 pe-z-50'}
+                        {...attributes.popper}
+                      >
+                        <div>
+                          <button onClick={() => setRectConfig({ stroke: '#00ffff' })}>青色</button>
+                          <button onClick={() => setRectConfig({ stroke: '#ff0000' })}>红色</button>
+                          <button onClick={() => setRectConfig({ stroke: '#0000ff' })}>蓝色</button>
+                        </div>
                       </div>
                     )}
                   </>
