@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from 'react';
+import { Fragment, useCallback, useMemo } from 'react';
 import { TextTool as PictodeText, TextToolConfig } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
@@ -39,11 +39,14 @@ export const TextTool = (props: TextToolProps) => {
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
   );
-  const active = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
+  const isActive = useMemo(() => tool.name === activeTool?.name, [tool, activeTool]);
+  const active = useCallback(() => {
+    app.setTool(tool);
+  }, [app, tool]);
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, active, tool }) : children ?? <Icon type="Text"></Icon>}
+      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="Text"></Icon>}
     </Fragment>
   );
 };

@@ -12,7 +12,7 @@ export interface PictodeContextType {
 export interface ToolProps extends ToolHooks {
   children?: ChildrenComponent<{
     app: App;
-    tool: Tool;
-    active: boolean;
+    isActive: boolean;
+    active: () => void;
   }>;
 }

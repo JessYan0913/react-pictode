@@ -68,24 +68,24 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                   app.disablePlugin(selectorPlugin.name);
                 }}
               >
-                {({ app, active, tool }) => (
+                {({ isActive, active }) => (
                   <Icon
-                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="MoveOne"
-                    onClick={() => app.setTool(tool)}
+                    onClick={active}
                   ></Icon>
                 )}
               </SelectTool>
               <RectTool>
-                {({ app, active, tool }) => (
+                {({ isActive, active }) => (
                   <>
-                    <div ref={setReferenceElement} onClick={() => app.setTool(tool)}>
+                    <div ref={setReferenceElement} onClick={active}>
                       <Icon
-                        className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                        className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                         type="RectangleOne"
                       ></Icon>
                     </div>
-                    {active && (
+                    {isActive && (
                       <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
                         <div className={'pe-bg-slate-300'}>面板</div>
                       </div>
@@ -94,36 +94,36 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 )}
               </RectTool>
               <EllipseTool>
-                {({ app, active, tool }) => (
+                {({ isActive, active }) => (
                   <Icon
-                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="OvalOne"
-                    onClick={() => app.setTool(tool)}
+                    onClick={active}
                   ></Icon>
                 )}
               </EllipseTool>
               <LineTool>
-                {({ app, active, tool }) => (
+                {({ isActive, active }) => (
                   <Icon
-                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="Clue"
-                    onClick={() => app.setTool(tool)}
+                    onClick={active}
                   ></Icon>
                 )}
               </LineTool>
               <TextTool>
-                {({ app, active, tool }) => (
+                {({ isActive, active }) => (
                   <Icon
-                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="Text"
-                    onClick={() => app.setTool(tool)}
+                    onClick={active}
                   ></Icon>
                 )}
               </TextTool>
               <ImageTool config={{ image: new Image() }}>
-                {({ active }) => (
+                {({ isActive }) => (
                   <Icon
-                    className={`pe-rounded ${active ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="ImageFiles"
                   ></Icon>
                 )}
