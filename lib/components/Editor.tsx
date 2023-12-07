@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
+import { util } from '@pictode/core';
 import { HistoryPlugin } from '@pictode/plugin-history';
 import { SelectorPlugin } from '@pictode/plugin-selector';
 
@@ -44,7 +45,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
     strokeWidth: 2,
   });
 
-  const [imageConfig] = useState<ImageConfig>({
+  const [imageConfig, setImageConfig] = useState<ImageConfig>({
     stroke: '#00000000',
     image: new Image(),
   });
@@ -141,10 +142,23 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 )}
               </TextTool>
               <ImageTool config={imageConfig}>
-                {({ isActive }) => (
+                {({ isActive, active }) => (
                   <Icon
                     className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
                     type="ImageFiles"
+                    onClick={async () => {
+                      const [file] = await util.selectFile(['.jpg', '.png']);
+                      const imgSrc = await util.readeFile<string>((reader) => reader.readAsDataURL(file));
+                      const image = new Image();
+                      image.src = imgSrc;
+                      setImageConfig({
+                        ...imageConfig,
+                        image,
+                      });
+                      setTimeout(() => {
+                        active();
+                      });
+                    }}
                   ></Icon>
                 )}
               </ImageTool>
