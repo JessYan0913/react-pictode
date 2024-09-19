@@ -1,4 +1,4 @@
-import { Editor } from '../lib/main';
+import { Editor } from './Editor';
 
 import './App.css';
 

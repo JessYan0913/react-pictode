@@ -2,19 +2,19 @@ import { HistoryPlugin } from '@pictode/plugin-history';
 import { SelectorPlugin } from '@pictode/plugin-selector';
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
-import type { PictodeContextType } from '../types';
+import type { PictodeContextType } from '../lib/types';
 
 import { UndoIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
-import { EllipseTool } from './EllipseTool';
-import { ImageConfig, ImageTool } from './ImageTool';
-import { LineTool } from './LineTool';
-import { Pictode } from './Pictode';
-import { RectTool } from './RectTool';
-import { SelectTool } from './SelectTool';
-import { Stage } from './Stage';
-import { TextTool } from './TextTool';
+import { EllipseTool } from '../lib/components/EllipseTool';
+import { ImageConfig, ImageTool } from '../lib/components/ImageTool';
+import { LineTool } from '../lib/components/LineTool';
+import { Pictode } from '../lib/components/Pictode';
+import { RectTool } from '../lib/components/RectTool';
+import { SelectTool } from '../lib/components/SelectTool';
+import { Stage } from '../lib/components/Stage';
+import { TextTool } from '../lib/components/TextTool';
 
-export interface EditorProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type EditorProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<React.RefObject<PictodeContextType>>) => {
   const { className } = props;
