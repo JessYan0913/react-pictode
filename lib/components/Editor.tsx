@@ -1,13 +1,23 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import { usePopper } from 'react-popper';
 import { HistoryPlugin } from '@pictode/plugin-history';
 import { SelectorPlugin } from '@pictode/plugin-selector';
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { usePopper } from 'react-popper';
 
 import type { PictodeContextType } from '../types';
 
+import {
+  CircleIcon,
+  ImageIcon,
+  MousePointer2Icon,
+  SplineIcon,
+  SquareIcon,
+  TypeIcon,
+  UndoIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
+} from 'lucide-react';
 import { ColorPicker } from './ColorPicker';
 import { EllipseTool } from './EllipseTool';
-import { Icon } from './Icon';
 import { ImageConfig, ImageTool } from './ImageTool';
 import { LineTool } from './LineTool';
 import { Pictode } from './Pictode';
@@ -61,16 +71,14 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
         {({ app }) => (
           <>
             <div className={'pe-w-full pe-flex pe-flex-row pe-flex-wrap pe-justify-around pe-bg-zinc-100 pe-p-2'}>
-              <Icon
+              <ZoomOutIcon
                 className={'pe-rounded hover:pe-bg-slate-200'}
-                type="ZoomOut"
                 onClick={() => app.scaleTo(app.scale() - app.config.mousewheel.factor)}
-              ></Icon>
-              <Icon
+              ></ZoomOutIcon>
+              <ZoomInIcon
                 className={'pe-rounded hover:pe-bg-slate-200'}
-                type="ZoomIn"
                 onClick={() => app.scaleTo(app.scale() + app.config.mousewheel.factor)}
-              ></Icon>
+              ></ZoomInIcon>
               <SelectTool
                 onActive={() => {
                   app.enablePlugin(selectorPlugin.name);
@@ -80,21 +88,19 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 }}
               >
                 {({ isActive, active }) => (
-                  <Icon
+                  <MousePointer2Icon
                     className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    type="MoveOne"
                     onClick={active}
-                  ></Icon>
+                  ></MousePointer2Icon>
                 )}
               </SelectTool>
               <RectTool config={rectConfig}>
                 {({ isActive, active }) => (
                   <>
                     <div ref={setReferenceElement} onClick={active}>
-                      <Icon
+                      <SquareIcon
                         className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                        type="RectangleOne"
-                      ></Icon>
+                      ></SquareIcon>
                     </div>
                     {isActive && (
                       <div
@@ -115,40 +121,40 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
               </RectTool>
               <EllipseTool>
                 {({ isActive, active }) => (
-                  <Icon
+                  <CircleIcon
                     className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    type="OvalOne"
                     onClick={active}
-                  ></Icon>
+                  ></CircleIcon>
                 )}
               </EllipseTool>
               <LineTool>
                 {({ isActive, active }) => (
-                  <Icon
+                  <SplineIcon
                     className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    type="Clue"
                     onClick={active}
-                  ></Icon>
+                  ></SplineIcon>
                 )}
               </LineTool>
               <TextTool>
                 {({ isActive, active }) => (
-                  <Icon
+                  <TypeIcon
                     className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    type="Text"
                     onClick={active}
-                  ></Icon>
+                  ></TypeIcon>
                 )}
               </TextTool>
               <ImageTool config={imageConfig}>
                 {({ isActive }) => (
-                  <Icon
+                  <ImageIcon
                     className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    type="ImageFiles"
-                  ></Icon>
+                  ></ImageIcon>
                 )}
               </ImageTool>
-              <Icon className={'pe-rounded hover:pe-bg-slate-200'} type="Return" onClick={() => app.undo()}></Icon>
+              <UndoIcon
+                className={'pe-rounded hover:pe-bg-slate-200'}
+                type="Return"
+                onClick={() => app.undo()}
+              ></UndoIcon>
             </div>
             <Stage className={'pe-w-full pe-h-full'}></Stage>
           </>

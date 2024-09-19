@@ -1,11 +1,11 @@
-import { Fragment, useMemo } from 'react';
 import { TextTool as PictodeText, TextToolConfig } from '@pictode/tools';
+import { Fragment, useMemo } from 'react';
 
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
 
-import { Icon } from './Icon';
+import { TypeIcon } from 'lucide-react';
 
 export type TextConfig = TextToolConfig;
 
@@ -40,13 +40,13 @@ export const TextTool = (props: TextToolProps) => {
           onCompleteDrawing,
         },
       }),
-    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
+    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing],
   );
   const { active, isActive } = useToolState<TextConfig>(app, tool, config);
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <Icon type="Text"></Icon>)}
+      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <TypeIcon></TypeIcon>)}
     </Fragment>
   );
 };

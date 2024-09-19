@@ -27,6 +27,7 @@
     "@pictode/plugin-selector": "^1.0.4",
     "@pictode/tools": "^1.0.4",
     "@popperjs/core": "^2.11.8",
+    "lucide-react": "^0.441.0",
     "react-color": "^2.19.3",
     "react-popper": "^2.3.0"
   },

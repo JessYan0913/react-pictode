@@ -1,11 +1,10 @@
-import { Fragment, useMemo } from 'react';
 import { RectTool as PictodeRectTool, RectToolConfig } from '@pictode/tools';
+import { Fragment, useMemo } from 'react';
 
+import { SquareIcon } from 'lucide-react';
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
-
-import { Icon } from './Icon';
 
 export type RectConfig = RectToolConfig;
 
@@ -40,15 +39,13 @@ export const RectTool = (props: RectToolProps) => {
           onCompleteDrawing,
         },
       }),
-    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
+    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing],
   );
   const { active, isActive } = useToolState<RectConfig>(app, tool, config);
 
   return (
     <Fragment>
-      {typeof children === 'function'
-        ? children({ app, isActive, active })
-        : (children ?? <Icon type="RectangleOne"></Icon>)}
+      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <SquareIcon></SquareIcon>)}
     </Fragment>
   );
 };

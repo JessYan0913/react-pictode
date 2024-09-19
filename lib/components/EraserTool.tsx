@@ -1,11 +1,10 @@
-import { Fragment, useMemo } from 'react';
 import { EraserTool as PictodeEraserTool } from '@pictode/tools';
+import { Fragment, useMemo } from 'react';
 
+import { EraserIcon } from 'lucide-react';
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
-
-import { Icon } from './Icon';
 
 export interface EraserToolProps extends ToolProps {}
 
@@ -22,13 +21,13 @@ export const EraserTool = (props: EraserToolProps) => {
           onCompleteDrawing,
         },
       }),
-    [onActive, onInactive, onStartDrawing, onCompleteDrawing]
+    [onActive, onInactive, onStartDrawing, onCompleteDrawing],
   );
   const { active, isActive } = useToolState(app, tool);
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <Icon type="Erase"></Icon>)}
+      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <EraserIcon></EraserIcon>)}
     </Fragment>
   );
 };

@@ -1,11 +1,10 @@
+import { EllipseToolConfig, EllipseTool as PictodeEllipseTool } from '@pictode/tools';
+import { CircleIcon } from 'lucide-react';
 import { Fragment, useMemo } from 'react';
-import { EllipseTool as PictodeEllipseTool, EllipseToolConfig } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
 import { ToolProps } from '../types';
-
-import { Icon } from './Icon';
 
 export type EllipseConfig = EllipseToolConfig;
 
@@ -35,15 +34,13 @@ export const EllipseTool = (props: EllipseToolProps) => {
           onCompleteDrawing,
         },
       }),
-    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
+    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing],
   );
   const { active, isActive } = useToolState<EllipseConfig>(app, tool, config);
 
   return (
     <Fragment>
-      {typeof children === 'function'
-        ? children({ app, isActive, active })
-        : (children ?? <Icon type="OvalOne"></Icon>)}
+      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <CircleIcon></CircleIcon>)}
     </Fragment>
   );
 };
