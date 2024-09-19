@@ -3,6 +3,5 @@ coverage
 node_modules
 dest
 types
+lib
 public/
-tailwind.config.js
-postcss.config.js
