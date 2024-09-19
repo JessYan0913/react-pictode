@@ -8,11 +8,11 @@ import { ToolChildren, ToolProps } from '../types';
 
 export type ImageConfig = ImageToolConfig;
 
-export interface ImageToolProps extends ToolProps {
+export interface ImageToolProps extends ToolProps<(image: HTMLImageElement) => void> {
   config?: ImageConfig;
 }
 
-const defaultChild: ToolChildren = ({ isActive, active }) => (
+const defaultChild: ToolChildren<(image: HTMLImageElement) => void> = ({ isActive, active }) => (
   <ImageIcon
     className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
     onClick={async (e) => {
@@ -30,22 +30,7 @@ export const ImageTool = (props: ImageToolProps) => {
   const { config, onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;
   const { app } = usePictode(PictodeImageTool.name);
 
-  const tool = useMemo(
-    () =>
-      new PictodeImageTool({
-        config: {
-          image: new Image(),
-        },
-        hooks: {
-          onActive,
-          onInactive,
-          onStartDrawing,
-          onCompleteDrawing,
-        },
-      }),
-    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing],
-  );
-  const isActive = useMemo(() => tool.name === app.curTool?.name, [tool, app.curTool]);
+  const isActive = useMemo(() => 'imageTool' === app.curTool?.name, [app.curTool]);
   const active = useCallback(
     (image: HTMLImageElement) => {
       app.setTool(

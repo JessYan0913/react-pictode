@@ -9,12 +9,12 @@ export interface PictodeContextType {
   plugins: Plugin[];
 }
 
-export type ToolChildren = ChildrenComponent<{
+export type ToolChildren<T extends Function = () => void> = ChildrenComponent<{
   app: App;
   isActive: boolean;
-  active: (...args: any) => void;
+  active: T;
 }>;
 
-export interface ToolProps extends ToolHooks {
-  children?: ToolChildren;
+export interface ToolProps<T extends Function = () => void> extends ToolHooks {
+  children?: ToolChildren<T>;
 }
