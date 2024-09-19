@@ -1,12 +1,12 @@
 import { HistoryPlugin } from '@pictode/plugin-history';
 import { SelectorPlugin } from '@pictode/plugin-selector';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 
 import type { PictodeContextType } from '../types';
 
 import { UndoIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { EllipseTool } from './EllipseTool';
-import { ImageTool } from './ImageTool';
+import { ImageConfig, ImageTool } from './ImageTool';
 import { LineTool } from './LineTool';
 import { Pictode } from './Pictode';
 import { RectTool } from './RectTool';
@@ -25,6 +25,10 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
   const historyPlugin = new HistoryPlugin();
 
   useImperativeHandle(ref, () => pictodeRef);
+  const [imageConfig] = useState<ImageConfig>({
+    stroke: '#000000',
+    strokeWidth: 10,
+  });
 
   return (
     <div className={`${className} pe-w-full pe-h-full`}>
@@ -56,7 +60,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
               <EllipseTool></EllipseTool>
               <LineTool></LineTool>
               <TextTool></TextTool>
-              <ImageTool></ImageTool>
+              <ImageTool config={imageConfig}></ImageTool>
               <UndoIcon className={'pe-p-1 pe-rounded hover:pe-bg-slate-200'} onClick={() => app.undo()}></UndoIcon>
             </div>
             <Stage className={'pe-w-full pe-h-full'}></Stage>

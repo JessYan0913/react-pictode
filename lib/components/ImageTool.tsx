@@ -6,7 +6,7 @@ import { ImageIcon } from 'lucide-react';
 import { usePictode } from '../hooks/usePictode';
 import { ToolChildren, ToolProps } from '../types';
 
-export type ImageConfig = ImageToolConfig;
+export type ImageConfig = Partial<ImageToolConfig>;
 
 export interface ImageToolProps extends ToolProps<(image: HTMLImageElement) => void> {
   config?: ImageConfig;
