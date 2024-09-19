@@ -28,7 +28,7 @@ export const EraserTool = (props: EraserToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="Erase"></Icon>}
+      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <Icon type="Erase"></Icon>)}
     </Fragment>
   );
 };

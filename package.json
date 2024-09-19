@@ -21,11 +21,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@icon-park/react": "^1.4.2",
-    "@pictode/core": "^1.0.0",
-    "@pictode/plugin-alignment": "^1.0.0",
-    "@pictode/plugin-history": "^1.0.0",
-    "@pictode/plugin-selector": "^1.0.0",
-    "@pictode/tools": "^1.0.0",
+    "@pictode/core": "^1.0.4",
+    "@pictode/plugin-alignment": "^1.0.4",
+    "@pictode/plugin-history": "^1.0.4",
+    "@pictode/plugin-selector": "^1.0.4",
+    "@pictode/tools": "^1.0.4",
     "@popperjs/core": "^2.11.8",
     "react-color": "^2.19.3",
     "react-popper": "^2.3.0"

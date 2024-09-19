@@ -1,5 +1,5 @@
 import { Fragment, useMemo } from 'react';
-import { ImageConfig as ImageToolConfig, ImageTool as PictodeImageTool } from '@pictode/tools';
+import { ImageTool as PictodeImageTool, ImageToolConfig as ImageToolConfig } from '@pictode/tools';
 
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
@@ -36,7 +36,7 @@ export const ImageTool = (props: ImageToolProps) => {
     <Fragment>
       {typeof children === 'function'
         ? children({ app, isActive, active })
-        : children ?? <Icon type="ImageFiles"></Icon>}
+        : (children ?? <Icon type="ImageFiles"></Icon>)}
     </Fragment>
   );
 };

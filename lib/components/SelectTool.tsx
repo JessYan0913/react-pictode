@@ -28,7 +28,9 @@ export const SelectTool = (props: SelectToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="MoveOne"></Icon>}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? <Icon type="MoveOne"></Icon>)}
     </Fragment>
   );
 };

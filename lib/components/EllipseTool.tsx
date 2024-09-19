@@ -41,7 +41,9 @@ export const EllipseTool = (props: EllipseToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="OvalOne"></Icon>}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? <Icon type="OvalOne"></Icon>)}
     </Fragment>
   );
 };

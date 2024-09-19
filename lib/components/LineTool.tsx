@@ -44,7 +44,7 @@ export const LineTool = (props: LineToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="Clue"></Icon>}
+      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <Icon type="Clue"></Icon>)}
     </Fragment>
   );
 };

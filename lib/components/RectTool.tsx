@@ -48,7 +48,7 @@ export const RectTool = (props: RectToolProps) => {
     <Fragment>
       {typeof children === 'function'
         ? children({ app, isActive, active })
-        : children ?? <Icon type="RectangleOne"></Icon>}
+        : (children ?? <Icon type="RectangleOne"></Icon>)}
     </Fragment>
   );
 };

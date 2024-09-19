@@ -46,7 +46,7 @@ export const TextTool = (props: TextToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="Text"></Icon>}
+      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <Icon type="Text"></Icon>)}
     </Fragment>
   );
 };
