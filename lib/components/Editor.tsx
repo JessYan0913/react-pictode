@@ -62,11 +62,11 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
           <>
             <div className={'pe-w-full pe-flex pe-flex-row pe-flex-wrap pe-justify-around pe-bg-zinc-100 pe-p-2'}>
               <ZoomOutIcon
-                className={'pe-rounded hover:pe-bg-slate-200'}
+                className={'pe-p-1 pe-rounded hover:pe-bg-slate-200'}
                 onClick={() => app.scaleTo(app.scale() - app.config.mousewheel.factor)}
               ></ZoomOutIcon>
               <ZoomInIcon
-                className={'pe-rounded hover:pe-bg-slate-200'}
+                className={'pe-p-1 pe-rounded hover:pe-bg-slate-200'}
                 onClick={() => app.scaleTo(app.scale() + app.config.mousewheel.factor)}
               ></ZoomInIcon>
               <SelectTool
@@ -106,11 +106,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
               <LineTool></LineTool>
               <TextTool></TextTool>
               <ImageTool config={imageConfig}></ImageTool>
-              <UndoIcon
-                className={'pe-rounded hover:pe-bg-slate-200'}
-                type="Return"
-                onClick={() => app.undo()}
-              ></UndoIcon>
+              <UndoIcon className={'pe-p-1 pe-rounded hover:pe-bg-slate-200'} onClick={() => app.undo()}></UndoIcon>
             </div>
             <Stage className={'pe-w-full pe-h-full'}></Stage>
           </>

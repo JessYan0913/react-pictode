@@ -10,7 +10,7 @@ export interface EraserToolProps extends ToolProps {}
 
 const defaultChild: ToolChildren = ({ isActive, active }) => (
   <EraserIcon
-    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+    className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
     onClick={active}
   ></EraserIcon>
 );

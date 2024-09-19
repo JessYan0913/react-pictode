@@ -13,7 +13,9 @@ export interface ImageToolProps extends ToolProps {
 }
 
 const defaultChild: ToolChildren = ({ isActive }) => (
-  <ImageIcon className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}></ImageIcon>
+  <ImageIcon
+    className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
+  ></ImageIcon>
 );
 
 export const ImageTool = (props: ImageToolProps) => {

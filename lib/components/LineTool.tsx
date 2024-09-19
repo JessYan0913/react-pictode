@@ -14,7 +14,7 @@ export interface LineToolProps extends ToolProps {
 
 const defaultChild: ToolChildren = ({ isActive, active }) => (
   <SplineIcon
-    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+    className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
     onClick={active}
   ></SplineIcon>
 );
