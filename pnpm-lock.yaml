@@ -26,6 +26,9 @@ importers:
       '@pictode/tools':
         specifier: ^1.0.4
         version: 1.0.4(@pictode/core@1.0.4)
+      '@pictode/utils':
+        specifier: ^1.0.4
+        version: 1.0.4
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
