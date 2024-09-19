@@ -4,9 +4,16 @@ import { Fragment, useMemo } from 'react';
 import { EraserIcon } from 'lucide-react';
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
+import { ToolChildren, ToolProps } from '../types';
 
 export interface EraserToolProps extends ToolProps {}
+
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <EraserIcon
+    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></EraserIcon>
+);
 
 export const EraserTool = (props: EraserToolProps) => {
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;
@@ -27,7 +34,9 @@ export const EraserTool = (props: EraserToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <EraserIcon></EraserIcon>)}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };

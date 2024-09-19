@@ -5,17 +5,7 @@ import { usePopper } from 'react-popper';
 
 import type { PictodeContextType } from '../types';
 
-import {
-  CircleIcon,
-  ImageIcon,
-  MousePointer2Icon,
-  SplineIcon,
-  SquareIcon,
-  TypeIcon,
-  UndoIcon,
-  ZoomInIcon,
-  ZoomOutIcon,
-} from 'lucide-react';
+import { SquareIcon, UndoIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import { ColorPicker } from './ColorPicker';
 import { EllipseTool } from './EllipseTool';
 import { ImageConfig, ImageTool } from './ImageTool';
@@ -86,14 +76,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 onInactive={() => {
                   app.disablePlugin(selectorPlugin.name);
                 }}
-              >
-                {({ isActive, active }) => (
-                  <MousePointer2Icon
-                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    onClick={active}
-                  ></MousePointer2Icon>
-                )}
-              </SelectTool>
+              ></SelectTool>
               <RectTool config={rectConfig}>
                 {({ isActive, active }) => (
                   <>
@@ -119,37 +102,10 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                   </>
                 )}
               </RectTool>
-              <EllipseTool>
-                {({ isActive, active }) => (
-                  <CircleIcon
-                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    onClick={active}
-                  ></CircleIcon>
-                )}
-              </EllipseTool>
-              <LineTool>
-                {({ isActive, active }) => (
-                  <SplineIcon
-                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    onClick={active}
-                  ></SplineIcon>
-                )}
-              </LineTool>
-              <TextTool>
-                {({ isActive, active }) => (
-                  <TypeIcon
-                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                    onClick={active}
-                  ></TypeIcon>
-                )}
-              </TextTool>
-              <ImageTool config={imageConfig}>
-                {({ isActive }) => (
-                  <ImageIcon
-                    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
-                  ></ImageIcon>
-                )}
-              </ImageTool>
+              <EllipseTool></EllipseTool>
+              <LineTool></LineTool>
+              <TextTool></TextTool>
+              <ImageTool config={imageConfig}></ImageTool>
               <UndoIcon
                 className={'pe-rounded hover:pe-bg-slate-200'}
                 type="Return"

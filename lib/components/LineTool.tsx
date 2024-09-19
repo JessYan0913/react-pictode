@@ -4,13 +4,20 @@ import { Fragment, useMemo } from 'react';
 import { SplineIcon } from 'lucide-react';
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
+import { ToolChildren, ToolProps } from '../types';
 
 export type LineTool = LineToolConfig;
 
 export interface LineToolProps extends ToolProps {
   config?: LineTool;
 }
+
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <SplineIcon
+    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></SplineIcon>
+);
 
 export const LineTool = (props: LineToolProps) => {
   const {
@@ -43,7 +50,9 @@ export const LineTool = (props: LineToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <SplineIcon></SplineIcon>)}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };

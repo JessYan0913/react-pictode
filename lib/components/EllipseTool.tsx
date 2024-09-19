@@ -4,13 +4,20 @@ import { Fragment, useMemo } from 'react';
 
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
+import { ToolChildren, ToolProps } from '../types';
 
 export type EllipseConfig = EllipseToolConfig;
 
 export interface EllipseToolProps extends ToolProps {
   config?: EllipseConfig;
 }
+
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <CircleIcon
+    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></CircleIcon>
+);
 
 export const EllipseTool = (props: EllipseToolProps) => {
   const {
@@ -40,7 +47,9 @@ export const EllipseTool = (props: EllipseToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <CircleIcon></CircleIcon>)}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };

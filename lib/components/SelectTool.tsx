@@ -3,12 +3,18 @@ import { Fragment, useMemo } from 'react';
 
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
+import { ToolChildren, ToolProps } from '../types';
 
 import { MousePointer2Icon } from 'lucide-react';
 
 export interface SelectToolProps extends ToolProps {}
 
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <MousePointer2Icon
+    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></MousePointer2Icon>
+);
 export const SelectTool = (props: SelectToolProps) => {
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;
   const { app } = usePictode(PictodeSelectTool.name);
@@ -30,7 +36,7 @@ export const SelectTool = (props: SelectToolProps) => {
     <Fragment>
       {typeof children === 'function'
         ? children({ app, isActive, active })
-        : (children ?? <MousePointer2Icon></MousePointer2Icon>)}
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };

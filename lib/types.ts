@@ -1,5 +1,5 @@
-import type { FC, ReactNode } from 'react';
 import type { App, Plugin, Tool, ToolHooks } from '@pictode/core';
+import type { FC, ReactNode } from 'react';
 
 export type ChildrenComponent<P> = ReactNode | FC<P>;
 
@@ -9,10 +9,12 @@ export interface PictodeContextType {
   plugins: Plugin[];
 }
 
+export type ToolChildren = ChildrenComponent<{
+  app: App;
+  isActive: boolean;
+  active: () => void;
+}>;
+
 export interface ToolProps extends ToolHooks {
-  children?: ChildrenComponent<{
-    app: App;
-    isActive: boolean;
-    active: () => void;
-  }>;
+  children?: ToolChildren;
 }

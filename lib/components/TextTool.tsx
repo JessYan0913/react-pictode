@@ -3,7 +3,7 @@ import { Fragment, useMemo } from 'react';
 
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
+import { ToolChildren, ToolProps } from '../types';
 
 import { TypeIcon } from 'lucide-react';
 
@@ -12,6 +12,13 @@ export type TextConfig = TextToolConfig;
 export interface TextToolProps extends ToolProps {
   config?: TextConfig;
 }
+
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <TypeIcon
+    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></TypeIcon>
+);
 
 export const TextTool = (props: TextToolProps) => {
   const {
@@ -46,7 +53,9 @@ export const TextTool = (props: TextToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <TypeIcon></TypeIcon>)}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };

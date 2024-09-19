@@ -4,13 +4,20 @@ import { Fragment, useMemo } from 'react';
 import { SquareIcon } from 'lucide-react';
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
+import { ToolChildren, ToolProps } from '../types';
 
 export type RectConfig = RectToolConfig;
 
 export interface RectToolProps extends ToolProps {
   config?: RectConfig;
 }
+
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <SquareIcon
+    className={`pe-rounded ${isActive ? 'pe-bg-blue-400' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></SquareIcon>
+);
 
 export const RectTool = (props: RectToolProps) => {
   const {
@@ -45,7 +52,9 @@ export const RectTool = (props: RectToolProps) => {
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : (children ?? <SquareIcon></SquareIcon>)}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };
