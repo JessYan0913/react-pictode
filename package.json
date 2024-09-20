@@ -2,7 +2,7 @@
   "name": "react-pictode",
   "author": "JessYan0913",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "files": [
