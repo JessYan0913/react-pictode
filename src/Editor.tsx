@@ -5,14 +5,19 @@ import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import type { PictodeContextType } from '../lib/types';
 
 import { UndoIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
-import { EllipseTool } from '../lib/components/EllipseTool';
-import { ImageConfig, ImageTool } from '../lib/components/ImageTool';
-import { LineTool } from '../lib/components/LineTool';
 import { Pictode } from '../lib/components/Pictode';
-import { RectTool } from '../lib/components/RectTool';
-import { SelectTool } from '../lib/components/SelectTool';
 import { Stage } from '../lib/components/Stage';
-import { TextTool } from '../lib/components/TextTool';
+import {
+  DrawingTool,
+  EllipseTool,
+  ImageConfig,
+  ImageTool,
+  LineTool,
+  RectTool,
+  RegularPolygonTool,
+  SelectTool,
+  TextTool,
+} from '../lib/main';
 
 export type EditorProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -57,8 +62,10 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 }}
               ></SelectTool>
               <RectTool></RectTool>
+              <RegularPolygonTool></RegularPolygonTool>
               <EllipseTool></EllipseTool>
               <LineTool></LineTool>
+              <DrawingTool></DrawingTool>
               <TextTool></TextTool>
               <ImageTool config={imageConfig}></ImageTool>
               <UndoIcon className={'pe-p-1 pe-rounded hover:pe-bg-slate-200'} onClick={() => app.undo()}></UndoIcon>
