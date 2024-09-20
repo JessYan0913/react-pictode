@@ -7,6 +7,11 @@ import { ToolChildren, ToolProps } from '../types';
 
 import { MousePointer2Icon } from 'lucide-react';
 
+const compose =
+  (...funcs: Function[]) =>
+  (...args: any) =>
+    funcs.reduce((val, func) => func(val), args);
+
 export interface SelectToolProps extends ToolProps {}
 
 const defaultChild: ToolChildren = ({ isActive, active }) => (
@@ -15,15 +20,16 @@ const defaultChild: ToolChildren = ({ isActive, active }) => (
     onClick={active}
   ></MousePointer2Icon>
 );
+
 export const SelectTool = (props: SelectToolProps) => {
-  const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;
+  const { onActive = () => {}, onInactive = () => {}, onStartDrawing, onCompleteDrawing, children } = props;
   const { app } = usePictode(PictodeSelectTool.name);
   const tool = useMemo(
     () =>
       new PictodeSelectTool({
         hooks: {
-          onActive,
-          onInactive,
+          onActive: compose(onActive, () => app.enablePlugin('selectorPlugin')),
+          onInactive: compose(onInactive, () => app.disablePlugin('selectorPlugin')),
           onStartDrawing,
           onCompleteDrawing,
         },
