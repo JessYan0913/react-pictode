@@ -53,14 +53,7 @@ export const Editor = forwardRef((props: EditorProps, ref: React.ForwardedRef<Re
                 className={'pe-p-1 pe-rounded hover:pe-bg-slate-200'}
                 onClick={() => app.scaleTo(app.scale() + app.config.mousewheel.factor)}
               ></ZoomInIcon>
-              <SelectTool
-                onActive={() => {
-                  app.enablePlugin(selectorPlugin.name);
-                }}
-                onInactive={() => {
-                  app.disablePlugin(selectorPlugin.name);
-                }}
-              ></SelectTool>
+              <SelectTool></SelectTool>
               <RectTool></RectTool>
               <RegularPolygonTool></RegularPolygonTool>
               <EllipseTool></EllipseTool>
