@@ -1,14 +1,20 @@
-import { Fragment, useMemo } from 'react';
 import { SelectTool as PictodeSelectTool } from '@pictode/tools';
+import { Fragment, useMemo } from 'react';
 
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
+import { ToolChildren, ToolProps } from '../types';
 
-import { Icon } from './Icon';
+import { MousePointer2Icon } from 'lucide-react';
 
 export interface SelectToolProps extends ToolProps {}
 
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <MousePointer2Icon
+    className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></MousePointer2Icon>
+);
 export const SelectTool = (props: SelectToolProps) => {
   const { onActive, onInactive, onStartDrawing, onCompleteDrawing, children } = props;
   const { app } = usePictode(PictodeSelectTool.name);
@@ -22,13 +28,15 @@ export const SelectTool = (props: SelectToolProps) => {
           onCompleteDrawing,
         },
       }),
-    [onActive, onInactive, onStartDrawing, onCompleteDrawing]
+    [onActive, onInactive, onStartDrawing, onCompleteDrawing],
   );
   const { active, isActive } = useToolState(app, tool);
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="MoveOne"></Icon>}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };

@@ -1,17 +1,23 @@
+import { LineToolConfig, LineTool as PictodeLineTool } from '@pictode/tools';
 import { Fragment, useMemo } from 'react';
-import { LineTool as PictodeLineTool, LineToolConfig } from '@pictode/tools';
 
+import { SplineIcon } from 'lucide-react';
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
-
-import { Icon } from './Icon';
+import { ToolChildren, ToolProps } from '../types';
 
 export type LineTool = LineToolConfig;
 
 export interface LineToolProps extends ToolProps {
   config?: LineTool;
 }
+
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <SplineIcon
+    className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></SplineIcon>
+);
 
 export const LineTool = (props: LineToolProps) => {
   const {
@@ -38,13 +44,15 @@ export const LineTool = (props: LineToolProps) => {
           onCompleteDrawing,
         },
       }),
-    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
+    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing],
   );
   const { active, isActive } = useToolState<LineTool>(app, tool, config);
 
   return (
     <Fragment>
-      {typeof children === 'function' ? children({ app, isActive, active }) : children ?? <Icon type="Clue"></Icon>}
+      {typeof children === 'function'
+        ? children({ app, isActive, active })
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };

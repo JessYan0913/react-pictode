@@ -1,0 +1,91 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2022": true
+  },
+  "globals": {
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "beforeEach": true,
+    "NodeJS": true
+  },
+  // "parserOptions": {
+  //   "ecmaVersion": "latest",
+  //   "parser": "@typescript-eslint/parser",
+  //   "sourceType": "module",
+  //   "project": "./tsconfig.json"
+  // },
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "unused-imports", "import", "prettier"],
+  "rules": {
+    // eslint (http://eslint.cn/docs/rules)
+    "no-var": ["error"],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "no-debugger": ["error"],
+    "no-extra-bind": ["error"],
+
+    // typescript (http://typescript-eslint.io/rules)
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "all",
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "@typescript-eslint/class-literal-property-style": ["error", "getters"],
+    "@typescript-eslint/no-empty-function": ["off"],
+    "@typescript-eslint/no-require-imports": ["off"],
+    // "@typescript-eslint/no-misused-promises": [
+    //   "error",
+    //   {
+    //     "checksVoidReturn": false
+    //   }
+    // ],
+
+    "import/first": ["error"],
+    "import/newline-after-import": ["error"],
+    "import/no-duplicates": ["error"],
+
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "semi": true,
+        "arrowParens": "always",
+        "bracketSpacing": true,
+        "printWidth": 120,
+        "tabWidth": 2,
+        "useTabs": false,
+        "endOfLine": "auto",
+        "vueIndentScriptAndStyle": false,
+        "vueIndentHTML": false
+      }
+    ]
+  }
+}

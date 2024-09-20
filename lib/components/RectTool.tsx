@@ -1,17 +1,23 @@
-import { Fragment, useMemo } from 'react';
 import { RectTool as PictodeRectTool, RectToolConfig } from '@pictode/tools';
+import { Fragment, useMemo } from 'react';
 
+import { SquareIcon } from 'lucide-react';
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
-import { ToolProps } from '../types';
-
-import { Icon } from './Icon';
+import { ToolChildren, ToolProps } from '../types';
 
 export type RectConfig = RectToolConfig;
 
 export interface RectToolProps extends ToolProps {
   config?: RectConfig;
 }
+
+const defaultChild: ToolChildren = ({ isActive, active }) => (
+  <SquareIcon
+    className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
+    onClick={active}
+  ></SquareIcon>
+);
 
 export const RectTool = (props: RectToolProps) => {
   const {
@@ -40,7 +46,7 @@ export const RectTool = (props: RectToolProps) => {
           onCompleteDrawing,
         },
       }),
-    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing]
+    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing],
   );
   const { active, isActive } = useToolState<RectConfig>(app, tool, config);
 
@@ -48,7 +54,7 @@ export const RectTool = (props: RectToolProps) => {
     <Fragment>
       {typeof children === 'function'
         ? children({ app, isActive, active })
-        : children ?? <Icon type="RectangleOne"></Icon>}
+        : (children ?? defaultChild({ isActive, active, app }))}
     </Fragment>
   );
 };

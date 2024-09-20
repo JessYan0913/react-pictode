@@ -19,16 +19,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.17",
-    "@icon-park/react": "^1.4.2",
-    "@pictode/core": "^1.0.0",
-    "@pictode/plugin-alignment": "^1.0.0",
-    "@pictode/plugin-history": "^1.0.0",
-    "@pictode/plugin-selector": "^1.0.0",
-    "@pictode/tools": "^1.0.0",
+    "@pictode/core": "^1.0.4",
+    "@pictode/plugin-alignment": "^1.0.4",
+    "@pictode/plugin-history": "^1.0.4",
+    "@pictode/plugin-selector": "^1.0.4",
+    "@pictode/tools": "^1.0.4",
+    "@pictode/utils": "^1.0.4",
     "@popperjs/core": "^2.11.8",
-    "react-color": "^2.19.3",
-    "react-popper": "^2.3.0"
+    "lucide-react": "^0.441.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -37,44 +35,39 @@
   "devDependencies": {
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
-    "@types/node": "^20.4.8",
-    "@types/react": "^18.2.15",
+    "@types/node": "20.14.8",
+    "@types/react": "18.3.3",
     "@types/react-color": "^3.0.9",
-    "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@types/react-dom": "18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.4.0",
+    "@typescript-eslint/parser": "^8.4.0",
+    "@typescript-eslint/typescript-estree": "^8.6.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.16",
-    "commitizen": "^4.3.0",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-define-config": "^1.24.1",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "glob": "^10.3.3",
     "husky": "^8.0.3",
+    "lint-staged": "^15.2.10",
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "prettier": "^3.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rimraf": "^5.0.5",
+    "prettier-plugin-organize-imports": "^4.0.0",
+    "react": "^18.3.1",
+    "react-color": "^2.19.3",
+    "react-dom": "^18.3.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.5.1",
     "vite-plugin-lib-inject-css": "^1.2.0"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "lint-staged": {
-    "*.{js,ts,tsx}": "eslint --fix",
+    "*.{js,ts,tsx}": "eslint --fix --ext .js,.ts,.tsx",
     "*.scss": "prettier --write"
   }
 }

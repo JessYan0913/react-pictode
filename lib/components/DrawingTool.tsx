@@ -1,38 +1,39 @@
-import { EllipseToolConfig, EllipseTool as PictodeEllipseTool } from '@pictode/tools';
-import { CircleIcon } from 'lucide-react';
+import { DrawingToolConfig, DrawingTool as PictodeDrawingTool } from '@pictode/tools';
+import { PencilIcon } from 'lucide-react';
 import { Fragment, useMemo } from 'react';
-
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
 import { ToolChildren, ToolProps } from '../types';
 
-export type EllipseConfig = EllipseToolConfig;
+export type DrawingConfig = DrawingToolConfig;
 
-export interface EllipseToolProps extends ToolProps {
-  config?: EllipseConfig;
+export interface DrawingToolProps extends ToolProps {
+  config?: DrawingConfig;
 }
 
 const defaultChild: ToolChildren = ({ isActive, active }) => (
-  <CircleIcon
+  <PencilIcon
     className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
     onClick={active}
-  ></CircleIcon>
+  ></PencilIcon>
 );
 
-export const EllipseTool = (props: EllipseToolProps) => {
+export const DrawingTool = (props: DrawingToolProps) => {
   const {
-    config = { stroke: '#000000', strokeWidth: 2, fill: '#00000000', opacity: 1 },
+    config = {
+      stroke: '#000000',
+      strokeWidth: 2,
+    },
     onActive,
     onInactive,
-    onStartDrawing,
     onCompleteDrawing,
+    onStartDrawing,
     children,
   } = props;
-
-  const { app } = usePictode(PictodeEllipseTool.name);
+  const { app } = usePictode(PictodeDrawingTool.name);
   const tool = useMemo(
     () =>
-      new PictodeEllipseTool({
+      new PictodeDrawingTool({
         config,
         hooks: {
           onActive,
@@ -41,10 +42,9 @@ export const EllipseTool = (props: EllipseToolProps) => {
           onCompleteDrawing,
         },
       }),
-    [config, onActive, onInactive, onStartDrawing, onCompleteDrawing],
+    [],
   );
-  const { active, isActive } = useToolState<EllipseConfig>(app, tool, config);
-
+  const { active, isActive } = useToolState(app, tool, config);
   return (
     <Fragment>
       {typeof children === 'function'

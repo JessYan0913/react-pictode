@@ -1,49 +1,55 @@
-import { EllipseToolConfig, EllipseTool as PictodeEllipseTool } from '@pictode/tools';
-import { CircleIcon } from 'lucide-react';
+import { RegularPolygonTool as PictodeRegularPolygonTool, RegularPolygonToolConfig } from '@pictode/tools';
+import { HexagonIcon } from 'lucide-react';
 import { Fragment, useMemo } from 'react';
-
 import { usePictode } from '../hooks/usePictode';
 import { useToolState } from '../hooks/useToolState';
 import { ToolChildren, ToolProps } from '../types';
 
-export type EllipseConfig = EllipseToolConfig;
+export type RegularPolygonConfig = RegularPolygonToolConfig;
 
-export interface EllipseToolProps extends ToolProps {
-  config?: EllipseConfig;
+export interface RegularPolygonToolProps extends ToolProps {
+  config?: RegularPolygonConfig;
 }
 
 const defaultChild: ToolChildren = ({ isActive, active }) => (
-  <CircleIcon
+  <HexagonIcon
     className={`pe-p-1 pe-rounded ${isActive ? 'pe-bg-blue-400 pe-text-white' : 'hover:pe-bg-slate-200'}`}
     onClick={active}
-  ></CircleIcon>
+  ></HexagonIcon>
 );
 
-export const EllipseTool = (props: EllipseToolProps) => {
+export const RegularPolygonTool = (props: RegularPolygonToolProps) => {
   const {
-    config = { stroke: '#000000', strokeWidth: 2, fill: '#00000000', opacity: 1 },
+    config = {
+      stroke: '#000000',
+      strokeWidth: 2,
+      fill: '#00000000',
+      cornerRadius: 0,
+      opacity: 1,
+      sides: 6,
+    },
     onActive,
     onInactive,
     onStartDrawing,
     onCompleteDrawing,
     children,
   } = props;
-
-  const { app } = usePictode(PictodeEllipseTool.name);
+  const { app } = usePictode(PictodeRegularPolygonTool.name);
   const tool = useMemo(
     () =>
-      new PictodeEllipseTool({
+      new PictodeRegularPolygonTool({
         config,
         hooks: {
           onActive,
           onInactive,
+
           onStartDrawing,
           onCompleteDrawing,
         },
       }),
     [config, onActive, onInactive, onStartDrawing, onCompleteDrawing],
   );
-  const { active, isActive } = useToolState<EllipseConfig>(app, tool, config);
+  const { active, isActive } = useToolState<RegularPolygonConfig>(app, tool, config);
 
   return (
     <Fragment>
