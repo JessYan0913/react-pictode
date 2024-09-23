@@ -1,5 +1,5 @@
-import { createContext, forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { App, EventArgs, Plugin, Tool } from '@pictode/core';
+import { createContext, forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 
 import { ChildrenComponent, PictodeContextType } from '../types';
 
@@ -10,9 +10,10 @@ export interface PictodeProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
 
 export const PictodeContext = createContext<PictodeContextType | null>(null);
 
+const app = new App();
+
 export const Pictode = forwardRef((props: PictodeProps, ref: React.ForwardedRef<PictodeContextType>) => {
   const { plugins = [], className, children } = props;
-  const app = useMemo(() => new App(), []);
   const [tool, setTool] = useState<Tool | null>(null);
 
   const contextValue = useMemo(() => ({ app, plugins, tool }), [app, plugins, tool]);
